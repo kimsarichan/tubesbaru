@@ -23,7 +23,9 @@ class group {
         this.tglberdiri = tglberdiri;
     }
 
-    public abstract void sendmessage();
+    public  void sendmessage(){
+    };
 
-    public abstract  void sendnote();
+    public  void sendnote(){
+    };
 }
