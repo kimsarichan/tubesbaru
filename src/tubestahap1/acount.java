@@ -1,5 +1,6 @@
 package tubestahap1;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,10 +15,10 @@ class acount extends profile {
     private int numberofstatus;
     private String notification;
 
-    public acount(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, String tanggal) {
+    public acount(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tanggal) {
         super(nama, job, gender, username, password, securityanswer, securityquestion, tanggal);
     }
-
+    
     public void addfriend(acount f) {
         friend[numberoffriend] = f;
         numberoffriend = numberoffriend + 1;
@@ -56,22 +57,4 @@ class acount extends profile {
         return notification;
     }
 
-    public static void main(String[] args) {
-        try {
-            acount a = new acount("sa", "jobs", "p", "sarichantik", "1235", "adres", "adres", "20/02/1995");
-            acount b = new acount("sari", "jobs", "p", "sarichantik", "1235", "adres", "adres", "20/02/1995");
-            acount c = new acount("ada", "jobs", "p", "sarichantik", "1235", "adres", "adres", "20/02/1995");
-            a.addfriend(b);
-            a.addfriend(c);
-            System.out.println(a.searchfriend("ada").nama);
-            System.out.println(a.searchfriend("yusril").nama);
-
-            message m = new message()
-        } catch (ParseException e) {
-            System.out.println("salah format tanggal ");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
 }

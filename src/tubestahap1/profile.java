@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 class profile {
 
-    SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
     protected String nama;
     protected String job;
     protected school sekolah[] = new school[5];
@@ -21,22 +20,89 @@ class profile {
     protected String securityanswer;
     protected Date tgl;
 
-    public profile(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, String tanggal) {
-        try {
-            this.nama = nama;
-            this.gender = gender;
-            this.job = job;
-            this.username = username;
-            this.password = password;
-            this.securityanswer = securityanswer;
-            this.securityquestion = securityquestion;
-            tgl = format.parse(tanggal);
-        } catch (ParseException e) {
-            System.out.println("salah format tanggal ");
-        }
-
+    public profile(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tgl) {
+        this.nama = nama;
+        this.gender = gender;
+        this.job = job;
+        this.username = username;
+        this.password = password;
+        this.securityanswer = securityanswer;
+        this.securityquestion = securityquestion;
+        this.tgl = tgl;
     }
 
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public int getNsekolah() {
+        return nsekolah;
+    }
+
+    public void setNsekolah(int nsekolah) {
+        this.nsekolah = nsekolah;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getSecurityquestion() {
+        return securityquestion;
+    }
+
+    public void setSecurityquestion(String securityquestion) {
+        this.securityquestion = securityquestion;
+    }
+
+    public String getSecurityanswer() {
+        return securityanswer;
+    }
+
+    public void setSecurityanswer(String securityanswer) {
+        this.securityanswer = securityanswer;
+    }
+
+    public Date getTgl() {
+        return tgl;
+    }
+
+    public void setTgl(Date tgl) {
+        this.tgl = tgl;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public void addschool(String schoolname, int yearattended) {
         sekolah[nsekolah] = new school(schoolname, yearattended);
         nsekolah = nsekolah + 1;

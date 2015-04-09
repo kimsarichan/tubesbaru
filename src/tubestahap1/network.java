@@ -2,8 +2,8 @@ package tubestahap1;
 
 class network {
 
-    public acount[] akun;
-    public group[] grup;
+    private acount[] akun;
+    private  group[] grup;
     private int numberofakun;
     private int numberofgrup;
 
@@ -11,7 +11,18 @@ class network {
         akun = new acount[na];
         grup = new group[ng];
     }
-
+    public acount getakun(int id){
+        return akun[id];
+    }
+    public group getgrup(int id){
+        return grup[id];
+    }
+    public int getnumberofakun(){
+        return numberofakun;
+    }
+     public int getnumberofgroup(){
+        return numberofgrup;
+    }
     public void addakun(acount a) {
         akun[numberofakun] = a;
         numberofakun = numberofakun + 1;
@@ -23,7 +34,15 @@ class network {
     }
 
     public acount searchakunbyusername(String i) {
+        //mencari akun berdasarkan username 
+        return null;
 
     }
+    public acount searchakunbycity(String i) {
+        return null;
 
+    }
+    public acount searchakunbysekolah(String s){
+        return null ;
+    }
 }
