@@ -14,6 +14,9 @@ public class home {
     FileIO io=new FileIO();
     boolean exit = false;
 
+    public void registrasi (){
+    
+    }
     public void menu(acount people) {
         int i = 0;
         while (i != 5) {

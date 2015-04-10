@@ -19,10 +19,10 @@ public class tubes_io_save {
         list_akun= new ArrayList<>();
         list_grup= new ArrayList<>();
     }
+    
     // save and load 
-    public void saveakun(ArrayList list) throws IOException {
+    public void saveakun(acount a) throws IOException {
         try{
-            list_akun= list;
             data.saveObject(list,"data_akun.txt");
         }
         catch(IOException e){
