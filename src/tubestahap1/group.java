@@ -8,7 +8,7 @@ class group {
     private acount member[] = new acount[100];
     private acount admin;
     private message pesan[] = new message[100];
-    private note notes[] = new note[100];
+    private text notes[] = new note[100]; //status 
     private int numberofpesan;
     private int numberofnotes;
     private int numberofmember;

@@ -1,12 +1,12 @@
 package tubestahap1;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 class text {
 
     protected String t;
-    protected String comment[] = new String[5];
+    protected ArrayList<String> comment ;
     protected int numberofcomment;
     protected int like;
     protected Date tglkirim;
@@ -14,20 +14,47 @@ class text {
     public text(String t, Date tglkirim) {
         this.t = t;
         this.tglkirim = tglkirim;
+        ArrayList comment =new ArrayList<>();
+    }
 
+    public String getT() {
+        return t;
+    }
+    
+    public String getComment(int id) {
+        return comment.get(id);
+    }
+
+    public void setComment(String c) {
+        comment.add(c);
+    }
+
+    public int getNumberofcomment() {
+        return numberofcomment;
+    }
+
+    public void setNumberofcomment(int numberofcomment) {
+        this.numberofcomment = numberofcomment;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public Date getTglkirim() {
+        return tglkirim;
+    }
+
+    public void setTglkirim(Date tglkirim) {
+        this.tglkirim = tglkirim;
     }
 
     public void edittext(String t) {
         this.t = t;
-    }
-
-    public void addcomment(String com) {
-        comment[numberofcomment] = com;
-        numberofcomment = numberofcomment + 1;
-    }
-
-    public void editcomment(String com, int num) {
-        comment[num] = com;
     }
 
     public void addlike() {

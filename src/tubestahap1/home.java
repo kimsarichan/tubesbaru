@@ -14,8 +14,29 @@ public class home {
     network friendsbook = new network(10, 5);//menginisiasi network dan mengeset jumlah akun yang akan tersedia 10 , jumlah grup 5 
     boolean exit = false;
 
-    public void menu(acount a) {
-        int i =0;
+    public void menustatus(acount people , int inputan ) {
+        switch (inputan) {
+            case 1:
+                System.out.println("Masukan status ");
+                String s= input.nextLine();
+                status st=new status(s, new Date());
+                people.addstatus(st);
+                break;
+            case 2:
+                System.out.println("Timeline");
+                for(int i=0; i<people.getNumberoffriend();i++){
+                    for(int j=0; j<people.getFriend(i).getNumberofstatus();j++){
+                        while(people.getFriend(i).getStat(j)!= null){
+                            System.out.println(people.getFriend(i)getStat());
+                        }
+                    }
+                }
+                break;
+        }
+    }
+    
+    public void menu(acount people) {
+        int i = 0;
         while (i != 5) {
             System.out.println("1. Messages");
             System.out.println("2. Search");
@@ -26,11 +47,23 @@ public class home {
             i = input.nextInt();
             switch (i) {
                 case 1:
-                //view messages from friends
-                    //send messages
+                    /*System.out.println("1. View Messages");
+                     System.out.println("2. Send Message ");
+                     int a = input.nextInt();
+                     switch(a){
+                     case 1:
+                            
+                     break;
+                     case 2:
+                     System.out.println("1. Masukan penerima   ");
+                     System.out.println("2. Masukan pesan  ");
+                        
+                     break;
+                     }
+                     */
                     break;
                 case 2:
-                //searchGroup
+                    //searchGroup
                     //SearchFriendbyUsername
                     //SearchFriendbyCity
                     //SearchFriendbySchool
@@ -38,12 +71,13 @@ public class home {
 
                     break;
                 case 3:
-                //add status
-                    //like commet
-                    //view friends timeline
+                    System.out.println("1. Make Status");
+                    System.out.println("2. View friends's timeline  ");
+                    int a = input.nextInt();
+                    menustatus(people , a);
                     break;
                 case 4:
-                //create  Group
+                    //create  Group
                     //show joined group
                     //show group profile
                     //Show group messages

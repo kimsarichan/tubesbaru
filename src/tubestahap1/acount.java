@@ -2,13 +2,13 @@ package tubestahap1;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 class acount extends profile {
 
     private acount friend[] = new acount[100];
-    private message pesan[] = new message[100];
-    private status stat[] = new status[100];
+    private ArrayList<message> pesan = new ArrayList<>();
+    private ArrayList<text> status = new ArrayList<>(); //status 
     private int numberoffriend;
     private int numberofgroup;
     private int numberofpesan;
