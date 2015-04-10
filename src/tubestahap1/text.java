@@ -11,12 +11,14 @@ class text {
     protected int like;
     protected Date tglkirim;
 
+    //constructor
     public text(String t, Date tglkirim) {
         this.t = t;
         this.tglkirim = tglkirim;
         ArrayList comment =new ArrayList<>();
     }
 
+    //setter and getter
     public String getT() {
         return t;
     }
@@ -56,7 +58,8 @@ class text {
     public void edittext(String t) {
         this.t = t;
     }
-
+    
+    //like 
     public void addlike() {
         like = like + 1;
     }

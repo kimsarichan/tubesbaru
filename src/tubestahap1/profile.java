@@ -2,9 +2,7 @@ package tubestahap1;
 
 import java.util.*;
 import java.text.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+
 
 class profile {
 
@@ -19,7 +17,8 @@ class profile {
     protected String securityquestion;
     protected String securityanswer;
     protected Date tgl;
-
+    
+    //constructor
     public profile(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tgl) {
         this.nama = nama;
         this.gender = gender;
@@ -30,7 +29,8 @@ class profile {
         this.securityquestion = securityquestion;
         this.tgl = tgl;
     }
-
+    
+    //setter and getter
     public String getNama() {
         return nama;
     }
@@ -102,16 +102,16 @@ class profile {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    //menambahkan sekolah
     public void addschool(String schoolname, int yearattended) {
         sekolah[nsekolah] = new school(schoolname, yearattended);
         nsekolah = nsekolah + 1;
     }
-
+    //mengubah password
     public void changepass(String p) {
         password = p;
     }
-
+    //lupa password 
     public void forgetpass(String securityans) {
         Scanner s = new Scanner(System.in);
         System.out.println("jawab pertanyaan dibawah ini ");
