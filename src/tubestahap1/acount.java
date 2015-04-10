@@ -18,10 +18,11 @@ class acount extends profile {
     public acount(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tanggal) {
         super(nama, job, gender, username, password, securityanswer, securityquestion, tanggal);
     }
-    
+    //menambahkan teman baru 
     public void addfriend(acount f) {
         friend[numberoffriend] = f;
         numberoffriend = numberoffriend + 1;
+        notification += nama+ " menambahkan "+ friend[numberoffriend].getNama() + " sebagai teman " ;
     }
 
     public acount searchfriend(String nama) throws Exception {
@@ -41,16 +42,6 @@ class acount extends profile {
             throw new notfoundexception("teman tidak ditemukan");
         }
 
-    }
-
-    public void sendmessage(acount f, message m) {
-        pesan[numberofpesan] = m;
-        numberofpesan = numberofpesan + 1;
-    }
-
-    public void addstatus(status s) {
-        stat[numberofstatus] = s;
-        numberofstatus = numberofstatus;
     }
 
     public String getnotification() {

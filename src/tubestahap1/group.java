@@ -1,14 +1,15 @@
 package tubestahap1;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
+
 
 class group {
 
     private acount member[] = new acount[100];
     private acount admin;
-    private message pesan[] = new message[100];
-    private text notes[] = new note[100]; //status 
+    private ArrayList<message> pesan = new ArrayList<>();
+    private ArrayList<text> status = new ArrayList<>(); //status 
     private int numberofpesan;
     private int numberofnotes;
     private int numberofmember;
