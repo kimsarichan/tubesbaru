@@ -63,9 +63,25 @@ class group implements Serializable {
     public void setTglberdiri(Date tglberdiri) {
         this.tglberdiri = tglberdiri;
     }
+
+    public int getNumberofmember() {
+        return numberofmember;
+    }
+
+    public void setNumberofmember(int numberofmember) {
+        this.numberofmember = numberofmember;
+    }
+
+    public acount getMember(int id) {
+        return member[id];
+    }
+    
     //kirim message
     public void sendpesan(message m){
         pesan.add(m);
+        for(int i=0 ; i< numberofmember;i++){
+            member[i].getmessage(member[i], m);
+        }
     }
     //add status
     public void tambahstatus(text e){

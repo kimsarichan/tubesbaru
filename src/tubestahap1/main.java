@@ -24,8 +24,10 @@ public class main {
 
     public void testing_user() {
         acount people = new acount("sari", "pelajar", "M", "saya", "bla", "bla", "bla", new Date(), "s@gmail.com");
+        people.setAlamat("bandung", "indonesia", "riung ");
         list_akun.add(people);
-        acount p = new acount("sari", "pelajar", "M", "bla", "bla", "bla", "bla", new Date(), "a@gmail.com");
+        acount p = new acount("adrian ", "pelajar", "M", "bla", "bla", "bla", "bla", new Date(), "a@gmail.com");
+        people.setAlamat("bandung", "indonesia", "riung ");
         list_akun.add(p);
         text a = new text("ga tahu", new Date());
         text b = new text("nooooo ", new Date());
@@ -86,61 +88,67 @@ public class main {
     }//done
 
     public void menu_teman(acount people, acount teman) {
-        System.out.println("1. Lihat Profile  ");
-        System.out.println("2. Kirim pesan ");
-        System.out.println("3. exit ");
-        int pil = input.nextInt();
-        switch (pil) {
-            case 1:
-                System.out.println("nama        : " + teman.getNama());
-                System.out.println("gender      : " + teman.getGender());
-                System.out.println("pekerjaan   : " + teman.getJob());
-                System.out.println("Kota        : " + teman.getAlamat().getcity());
-                System.out.println("Negara      : " + teman.getAlamat().getnation());
-                System.out.println("email       : " + teman.getEmail());
+        int pil =0;
+        while (pil != 3) {
+            System.out.println("1. Lihat Profile  ");
+            System.out.println("2. Kirim pesan ");
+            System.out.println("3. exit ");
+            pil = input.nextInt();
+            switch (pil) {
+                case 1:
+                    System.out.println("nama        : " + teman.getNama());
+                    System.out.println("gender      : " + teman.getGender());
+                    System.out.println("pekerjaan   : " + teman.getJob());
+                    System.out.println("Kota        : " + teman.getAlamat().getcity());
+                    System.out.println("Negara      : " + teman.getAlamat().getnation());
+                    System.out.println("email       : " + teman.getEmail());
 
-                break;
-            case 2:
-                System.out.println("tulis pesan anda");
-                String a = input.nextLine();
-                message m = new message(a, new Date(), people);
-                people.sendmessage(teman, m);
-                people.getPesan().get(0);
+                    break;
+                case 2:
+                    System.out.println("tulis pesan anda");
+                    String a = input.nextLine();
+                    message m = new message(a, new Date(), people);
+                    people.sendmessage(teman, m);
+                    people.getPesan().get(0);
 
+            }
         }
 
     }//done
 
     public void menu_pesan(acount people) throws Exception {
-        System.out.println("1. Kirim pesan");
-        System.out.println("2. Lihat pesan  ");
-        int pil = input.nextInt();
-        switch (pil) {
-            case 1:
-                System.out.println("masukan usename teman yang akan di kirimkan pesan ");
-                try {
-                    String username = input.next();
-                    acount p = people.searchfriend(username);
-                    input.nextLine();
-                    System.out.println("masukan pesan yang ingin anda kirim ");
-                    String pesan = input.nextLine();
-                    message m = new message(pesan, new Date(), p);
-                    people.sendmessage(p, m);
+        int pil = 0;
+        while (pil != 3) {
+            System.out.println("1. Kirim pesan");
+            System.out.println("2. Lihat pesan  ");
+            pil = input.nextInt();
+            switch (pil) {
+                case 1:
+                    //mengirim pesan 
+                    System.out.println("masukan usename teman yang akan di kirimkan pesan ");
+                    try {
+                        String username = input.next();
+                        acount p = people.searchfriend(username);
+                        input.nextLine();
+                        System.out.println("masukan pesan yang ingin anda kirim ");
+                        String pesan = input.nextLine();
+                        message m = new message(pesan, new Date(), people);
+                        people.sendmessage(p, m);
 
-                } catch (Exception ex) {
-                    throw new Exception("terjadi kesalahan ");
-                } finally {
-                    Scanner input = new Scanner(System.in);
-                }
-                break;
-            case 2:
-                for (message pes : people.getPesan()) {
-                    System.out.println("to :" + pes.getP().getNama());
-                    System.out.println(pes.getM());
-                }
-                break;
-            case 3:
-                break;
+                    } catch (Exception ex) {
+                        throw new Exception("terjadi kesalahan ");
+                    } finally {
+                        Scanner input = new Scanner(System.in);
+                    }
+                    break;
+                case 2:
+                    //melihat pesan yang ada pada akun
+                    for (message pes : people.getPesan()) {
+                        System.out.println("from :" + pes.getP().getNama());
+                        System.out.println(pes.getM());
+                    }
+                    break;
+            }
         }
     }// done 
 
@@ -199,7 +207,7 @@ public class main {
                 String a = input.nextLine();
                 tmp.get(cpm).setComment(a);
                 System.out.println(tmp.get(cpm));
-                for(String c : tmp.get(cpm).getComment()){
+                for (String c : tmp.get(cpm).getComment()) {
                     System.out.println(c);
                 }
                 break;
@@ -210,34 +218,76 @@ public class main {
 
     }//done
 
-    public void menu_grup(acount people, group grup ) {
-        System.out.println(grup.getNama());
-        System.out.println(grup.getDescription());
-        System.out.println("1. Lihat timeline group");
-        System.out.println("2. Lihat pesan group ");
-        System.out.println("3. Kirim pesan group ");
-        System.out.println("4. Lihat anggota group ");
-        int pil = input.nextInt();
-        switch(pil){
-            case 1:
-                int k=0;
-                ArrayList<text> tmp = new ArrayList<>();
-                for(text s:grup.getStatus()){
-                    tmp.add(s);
-                    System.out.println(k+" . "+s.getT());
-                    System.out.println("jumlah like :" + s.getLike());
-                    k++;
-                }
-                break;
-            case 2: 
-                int a=0;
-                for(message m:grup.getPesan()){
-                    System.out.println(a+" . "+m.getP());
-                    a++;
-                }
-                break;
-            case 3: 
-                break;
+    public void menu_grup(acount people, group grup) {
+        int pil = 0;
+        while (pil != 5) {
+            System.out.println(grup.getNama());
+            System.out.println(grup.getDescription());
+            System.out.println("1. Lihat timeline group");
+            System.out.println("2. Lihat pesan group ");
+            System.out.println("3. Kirim pesan group ");
+            System.out.println("4. Lihat anggota group ");
+            System.out.println("5. Keluar ");
+            pil = input.nextInt();
+            switch (pil) {
+                case 1:
+                    //meihat status status yang dibuat pada grup
+                    int k = 0;
+                    ArrayList<text> tmp = new ArrayList<>();
+                    for (text s : grup.getStatus()) {
+                        tmp.add(s);
+                        System.out.println(k + " . " + s.getT());
+                        System.out.println("jumlah like :" + s.getLike());
+                        k++;
+                    }
+                    System.out.println("Comment atau like Status ");
+                    System.out.println("Masukan nomor Status  ");
+                    int cl = input.nextInt();
+                    System.out.println("Comment tekan 1 ");
+                    System.out.println("Like tekan 2 ");
+                    int cpm = input.nextInt();
+                    input.nextLine();
+                    switch (cpm) {
+                        case 1:
+                            String a = input.nextLine();
+                            tmp.get(cpm).setComment(a);
+                            System.out.println(tmp.get(cpm));
+                            for (String c : tmp.get(cpm).getComment()) {
+                                System.out.println(c);
+                            }
+                            break;
+                        case 2:
+                            tmp.get(cpm).addlike();
+                            break;
+                    }
+
+                    break;
+                case 2:
+                    //melihat pesan yang ada pada grup
+                    int a = 0;
+                    for (message m : grup.getPesan()) {
+                        System.out.println(a + " . " + m.getP());
+                        a++;
+                    }
+                    break;
+                case 3:
+                    //mengirim pesan pada grup
+                    input.nextLine();
+                    System.out.println("masukan pesan yang ingin anda kirim ");
+                    String pesan = input.nextLine();
+                    pesan = "this is grup message \n" + pesan;
+                    message m = new message(pesan, new Date(), people);
+                    grup.sendpesan(m);
+                    break;
+                case 4:
+                    //melihat daftar nama member pada grup
+                    input.nextLine();
+                    System.out.println("Daftar member  ");
+                    for (int i = 0; i < grup.getNumberofmember(); i++) {
+                        grup.getMember(i).getNama();
+                    }
+                    break;
+            }
         }
     }//not done
 
@@ -250,6 +300,7 @@ public class main {
             System.out.println("4. Pesan ");
             System.out.println("5. Group ");
             System.out.println("6. Buat Status baru");
+            System.out.println("7. Log Out dan keuar");
             pil = input.nextInt();
             switch (pil) {
                 case 1:
@@ -292,6 +343,7 @@ public class main {
                     }
                     break;
                 case 2:
+                    //melihat profile user
                     System.out.println("nama        : " + people.getNama());
                     System.out.println("gender      : " + people.getGender());
                     System.out.println("pekerjaan   : " + people.getJob());
@@ -300,12 +352,15 @@ public class main {
                     System.out.println("email       : " + people.getEmail());
                     break;
                 case 3:
+                    // melihat timeline user yang berisi status status 
                     timeline(people);
                     break;
                 case 4:
+                    //mengirim pesan dan melihat semua pesan 
                     menu_pesan(people);
                     break;
                 case 5:
+                    //melakukan interaksi pada grup
                     System.out.println("1. Buat Grup baru   ");
                     System.out.println("2. Join Grup ");
                     System.out.println("3. Lihat Grup yang diikuti ");
@@ -325,17 +380,21 @@ public class main {
                             break;
                         case 2:
                             group gr = cari_group();
-                            System.out.println("Apakah anda ingin bergabung dengan group ini ?");
+                            System.out.println("Apakah anda ingin bergabung dengan group ini ? (Y/N)");
+                            String ans = input.next();
 
                             break;
                         case 3:
                             System.out.println("masukan nama grup      :");
                             String nama_grup = input.nextLine();
+                            group groups = people.searchgrup(nama_grup);
+                            menu_grup(people, groups);
                             break;
 
                     }
                     break;
                 case 6:
+                    //menulis status baru 
                     System.out.println("Tulis status anda   ");
                     input.nextLine();
                     String a = input.nextLine();
@@ -344,7 +403,7 @@ public class main {
                     break;
             }
         }
-    }//not done
+    }// done
 
     public void login() throws Exception {
         // fungsi agar user dapat melakukan login
@@ -388,7 +447,7 @@ public class main {
             m.testing_user();
             m.login();
         } catch (Exception ex) {
-
+            System.out.println(ex.getMessage());
         }
     }//test 
 
