@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-package tubestahap1;
+/*package tubestahap1;
 import java.io.*;
 import java.util.*;
 /**
  *
  * @author A450LC W8
  */
-public class tubes_io_save {
+/*public class tubes_io_save {
     private ArrayList<acount> list_akun ;
     private ArrayList<group> list_grup ;
     private FileIO data;
@@ -47,4 +47,4 @@ public class tubes_io_save {
         } 
     }
     
-}
+}*/

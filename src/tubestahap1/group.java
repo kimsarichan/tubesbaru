@@ -11,8 +11,6 @@ class group implements Serializable {
     private acount admin;
     private ArrayList<message> pesan = new ArrayList<>();
     private ArrayList<text> status = new ArrayList<>(); //status 
-    private int numberofpesan;
-    private int numberofnotes;
     private int numberofmember;
     private String nama;
     private String description;
@@ -41,31 +39,7 @@ class group implements Serializable {
     public ArrayList<text> getStatus() {
         return status;
     }
-
-    public int getNumberofpesan() {
-        return numberofpesan;
-    }
-
-    public void setNumberofpesan(int numberofpesan) {
-        this.numberofpesan = numberofpesan;
-    }
-
-    public int getNumberofnotes() {
-        return numberofnotes;
-    }
-
-    public void setNumberofnotes(int numberofnotes) {
-        this.numberofnotes = numberofnotes;
-    }
-
-    public int getNumberofmember() {
-        return numberofmember;
-    }
-
-    public void setNumberofmember(int numberofmember) {
-        this.numberofmember = numberofmember;
-    }
-
+    
     public String getNama() {
         return nama;
     }

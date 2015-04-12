@@ -7,18 +7,22 @@ import java.util.*;
 
 class acount extends profile implements Serializable {
 
-    private acount friend[] = new acount[100];
-    private ArrayList<message> pesan = new ArrayList<>();
-    private ArrayList<text> status = new ArrayList<>(); //status 
+    private acount friend[];
+    private group grup[];
+    private ArrayList<message> pesan;
+    private ArrayList<text> status;
     private int numberoffriend;
     private int numberofgroup;
-    private int numberofpesan;
-    private int numberofstatus;
     private String notification;
 
-    public acount(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tanggal) {
-        super(nama, job, gender, username, password, securityanswer, securityquestion, tanggal);
+    public acount(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tanggal, String email) {
+        super(nama, job, gender, username, password, securityanswer, securityquestion, tanggal, email);
+        friend = new acount[100];
+        grup = new group[100];
+        pesan = new ArrayList<>();
+        status = new ArrayList<>(); //status
     }
+
     //setter dan getter 
     public int getNumberoffriend() {
         return numberoffriend;
@@ -36,20 +40,13 @@ class acount extends profile implements Serializable {
         this.numberofgroup = numberofgroup;
     }
 
-    public int getNumberofpesan() {
-        return numberofpesan;
+    public void addgroup(group g) {
+        grup[numberofgroup] = g;
+        numberofgroup += 1;
     }
 
-    public void setNumberofpesan(int numberofpesan) {
-        this.numberofpesan = numberofpesan;
-    }
-
-    public int getNumberofstatus() {
-        return numberofstatus;
-    }
-
-    public void setNumberofstatus(int numberofstatus) {
-        this.numberofstatus = numberofstatus;
+    public group getgroup(int id) {
+        return grup[id];
     }
 
     public String getNotification() {
@@ -71,29 +68,40 @@ class acount extends profile implements Serializable {
     public ArrayList<text> getStatus() {
         return status;
     }
-    
+
     //menambahkan pesan baru 
-    public void sendmessage(message m){
-       pesan.add(m);
+    public void getmessage(acount pengirim, message m) {
+        this.pesan.add(m);
+
     }
+
+    public void sendmessage(acount penerima, message m) {
+        m.setM("From : " + nama + "\n" + m.getM());
+        this.pesan.add(m);
+        m.getP().getmessage(this, m);
+
+    }
+
     //menambahkan status baru 
-    public void addstatus(text stat){
+    public void addstatus(text stat) {
         status.add(stat);
     }
+
     //menambahkan teman baru 
     public void addfriend(acount f) {
         friend[numberoffriend] = f;
         numberoffriend = numberoffriend + 1;
-        notification += nama+ " menambahkan "+ friend[numberoffriend].getNama() + " sebagai teman " ;
+        notification += nama + " menambahkan " + friend[numberoffriend].getNama() + " sebagai teman ";
+
     }
-   
+
     //mencari teman  
-    public acount searchfriend(String nama) throws Exception {
+    public acount searchfriend(String username) throws Exception {
         int i = 0;
         acount a = null;
         boolean ketemu = false;
         while (i < numberoffriend && ketemu == false) {
-            if (friend[i].nama.equals(nama)) {
+            if (friend[i].username.equals(username)) {
                 a = friend[i];
                 ketemu = true;
             }
@@ -107,8 +115,24 @@ class acount extends profile implements Serializable {
 
     }
 
-    public String getnotification() {
-        return notification;
+    //mencari grup
+    public group searchgrup(String nama) throws Exception {
+        int i = 0;
+        group a = null;
+        boolean ketemu = false;
+        while (i < numberofgroup && ketemu == false) {
+            if (grup[i].getNama().equalsIgnoreCase(nama)) {
+                a = grup[i];
+                ketemu = true;
+            }
+            i++;
+        }
+        if (ketemu == true) {
+            return a;
+        } else {
+            throw new notfoundexception("grup tidak ditemukan");
+        }
+
     }
 
 }

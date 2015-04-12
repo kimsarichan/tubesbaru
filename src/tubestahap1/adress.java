@@ -3,7 +3,6 @@ package tubestahap1;
 class adress {
 
     private String city;
-    private String province;
     private String nation;
     private String fulladress;
 
@@ -17,9 +16,6 @@ class adress {
         this.city = city;
     }
 
-    public void setprovince(String province) {
-        this.province = province;
-    }
 
     public void setnation(String nation) {
         this.nation = nation;
@@ -35,10 +31,6 @@ class adress {
 
     public String getnation() {
         return nation;
-    }
-
-    public String getprovince() {
-        return province;
     }
 
     public String getfulladress() {

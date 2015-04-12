@@ -1,9 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+jangan dipake dulu .__. pake main aja 
+io jugajangan dipake dulu 
  */
-package tubestahap1;
+
+/*package tubestahap1;
 
 import java.util.Scanner;
 import java.util.*;
@@ -11,7 +11,6 @@ import java.util.*;
 public class home {
 
     Scanner input = new Scanner(System.in);
-    FileIO io=new FileIO();
     boolean exit = false;
 
     public void registrasi (){
@@ -43,7 +42,7 @@ public class home {
                      break;
                      }
                      */
-                    break;
+/*                   break;
                 case 2:
                     //searchGroup
                     //SearchFriendbyUsername
@@ -75,7 +74,8 @@ public class home {
     public void login() {
         //fungsi agar user dapat melakukan login
         boolean ketemu = false;
-        acount tmp = null; // akun yang akan di iisialisasi
+        acount tmp = null; 
+        // akun yang akan di iisialisasi
         System.out.println("Log In menu");
         System.out.println("Username :");
         String username = input.next();
@@ -109,4 +109,4 @@ public class home {
         }
     }
 
-}
+}*/

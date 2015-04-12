@@ -8,9 +8,9 @@ class profile {
 
     protected String nama;
     protected String job;
-    protected school sekolah[] = new school[5];
     protected int nsekolah;
     protected String gender;
+    protected String email;
     public adress alamat;
     public String username;
     private String password;
@@ -19,7 +19,7 @@ class profile {
     protected Date tgl;
     
     //constructor
-    public profile(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tgl) {
+    public profile(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tgl, String email) {
         this.nama = nama;
         this.gender = gender;
         this.job = job;
@@ -28,9 +28,27 @@ class profile {
         this.securityanswer = securityanswer;
         this.securityquestion = securityquestion;
         this.tgl = tgl;
+        this.email=email;
     }
     
     //setter and getter
+    public adress getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(adress alamat) {
+        this.alamat = alamat;
+    }
+    
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getNama() {
         return nama;
     }
@@ -102,11 +120,12 @@ class profile {
     public void setPassword(String password) {
         this.password = password;
     }
-    //menambahkan sekolah
-    public void addschool(String schoolname, int yearattended) {
-        sekolah[nsekolah] = new school(schoolname, yearattended);
-        nsekolah = nsekolah + 1;
+    //menambahkan alamat 
+    public void setAlamat(String City, String Nation , String Fulladress){
+        adress a= new adress(City, Nation , Fulladress);
+        alamat=a;
     }
+    
     //mengubah password
     public void changepass(String p) {
         password = p;
