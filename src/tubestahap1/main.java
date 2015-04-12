@@ -96,6 +96,7 @@ public class main {
             pil = input.nextInt();
             switch (pil) {
                 case 1:
+                    //profile teman
                     System.out.println("nama        : " + teman.getNama());
                     System.out.println("gender      : " + teman.getGender());
                     System.out.println("pekerjaan   : " + teman.getJob());
@@ -105,6 +106,7 @@ public class main {
 
                     break;
                 case 2:
+                    //kirim pesan pada teman 
                     System.out.println("tulis pesan anda");
                     String a = input.nextLine();
                     message m = new message(a, new Date(), people);
@@ -304,6 +306,7 @@ public class main {
             pil = input.nextInt();
             switch (pil) {
                 case 1:
+                    //menambahkan teman baru dan melihat profile teman yang ada
                     System.out.println("1. Cari Teman   ");
                     System.out.println("2. Lihat daftar teman ");
                     System.out.println("3. Tambahkan teman ");
