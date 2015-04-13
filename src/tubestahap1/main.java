@@ -29,10 +29,8 @@ public class main {
         acount p = new acount("adrian ", "pelajar", "M", "bla", "bla", "bla", "bla", new Date(), "a@gmail.com");
         people.setAlamat("bandung", "indonesia", "riung ");
         list_akun.add(p);
-        text a = new text("ga tahu", new Date());
         text b = new text("nooooo ", new Date());
-        list_akun.get(0).addstatus(a);
-        list_akun.get(1).addstatus(b);
+        list_akun.get(0).addstatus(b);
     }
 
     public void registrasi() throws Exception {
@@ -40,6 +38,19 @@ public class main {
         System.out.println("1. Username 		: ");
         String username = input.next();
         //cek username ganda
+        boolean sama = false;
+        for (acount c : list_akun) {
+            if (username.equals(username)) {
+                sama = true;
+                break;
+            }
+        }
+        if (sama) {
+            System.out.println("Ok");
+        } else {
+            throw new Exception("Username sudah ada");
+        }
+
         //end cek username ganda
         System.out.println("2. Nama 			: ");
         String nama = input.next();
@@ -55,22 +66,25 @@ public class main {
         } else {
             throw new Exception("Password tidak sama");
         }
+        //end password sama 
         System.out.println("Security Question : What is your favorite animal ?");
         String securityquestion = ("What is your favorite animal?");
+        input.nextLine();
         System.out.println("6. Answer	: ");
-        String securityanswer = input.next();
-        System.out.println("data pribadi berhasil di simpan ");
+        String securityanswer = input.nextLine();
         System.out.println("7. Gender(M/F) 		: ");
         String gender = input.next();
         System.out.println("8. Birthdate(dd-MM-yyyy): ");
         String birth_date = input.next();
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         Date startDate;
+        //parse tanggal string to date
         try {
             startDate = df.parse(birth_date);
         } catch (ParseException e) {
             throw e;
         }
+        //end parse tanggal
         System.out.println("9. Job	: ");
         String job = input.next();
         System.out.println("Masukan alamat pribadi anda ");
@@ -82,13 +96,13 @@ public class main {
         String fulladress = input.next();
         acount people = new acount(nama, job, gender, username, password, securityanswer, securityquestion, startDate, email);
         people.setAlamat(city, nationality, fulladress);
-        System.out.print(people.getNama());
+        System.out.println("data pribadi berhasil di simpan ");
         list_akun.add(people);
 
     }//done
 
     public void menu_teman(acount people, acount teman) {
-        int pil =0;
+        int pil = 0;
         while (pil != 3) {
             System.out.println("1. Lihat Profile  ");
             System.out.println("2. Kirim pesan ");
@@ -187,35 +201,54 @@ public class main {
     }//done
 
     public void timeline(acount people) {
-        System.out.println("Timeline");
-        int k = 1;
-        ArrayList<text> tmp = new ArrayList<>();
-        for (int i = 0; i < people.getNumberoffriend(); i++) {
-            for (int j = 0; j < people.getFriend(i).getStatus().size(); i++) {
-                tmp.add(people.getFriend(i).getStatus().get(j));
-                System.out.println(k + ". " + people.getFriend(i).getStatus().get(j).getT());
-                System.out.println("jumlah like :" + people.getFriend(i).getStatus().get(j).getLike());
-            }
-        }
-        System.out.println("Comment atau like Status ");
-        System.out.println("Masukan nomor Status  ");
-        int cl = input.nextInt();
-        System.out.println("Comment tekan 1 ");
-        System.out.println("Like tekan 2 ");
-        int cpm = input.nextInt();
-        input.nextLine();
-        switch (cpm) {
-            case 1:
-                String a = input.nextLine();
-                tmp.get(cpm).setComment(a);
-                System.out.println(tmp.get(cpm));
-                for (String c : tmp.get(cpm).getComment()) {
-                    System.out.println(c);
+        try {
+            System.out.println("Timeline");
+            int k = 1;
+            ArrayList<text> tmp = new ArrayList<>();
+            for (int i = 0; i < people.getNumberoffriend(); i++) {
+                for (int j = 0; j < people.getFriend(i).getStatus().size(); i++) {
+                    tmp.add(people.getFriend(i).getStatus().get(j));
+                    System.out.println(k + ". " + people.getFriend(i).getStatus().get(j).getT());
+                    System.out.println("jumlah like :" + people.getFriend(i).getStatus().get(j).getLike());
+                    k++;
                 }
-                break;
-            case 2:
-                tmp.get(cpm).addlike();
-                break;
+            }
+            for (text s : people.getStatus()) {
+                tmp.add(s);
+                System.out.println(k + ". " + s.getT());
+                System.out.println("jumlah like :" + s.getLike());
+                k++;
+            }
+            System.out.println("Comment atau like Status ");
+            System.out.println("Masukan nomor Status  ");
+            int cl = input.nextInt();
+            cl=cl-1;
+            System.out.println("Comment tekan 1 ");
+            System.out.println("Like tekan 2 ");
+            int cpm = input.nextInt();
+            
+            switch (cpm) {
+                case 1:
+                    input.nextLine();
+                    System.out.println("Masukan comment anda ");
+                    String a = input.nextLine();
+                    tmp.get(cl).setComment(a);
+                    System.out.println(tmp.get(cpm));
+                    if(tmp.get(cl).getComment()!= null){
+                        for (String c : tmp.get(cl).getComment()) {
+                            System.out.println(c);
+                        }
+                    }
+                    break;
+                case 2:
+                    tmp.get(cl).addlike();
+                    System.out.println("status berhasil di like ");
+                    break;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Variable null ditemukan");
+        } finally {
+            Scanner input = new Scanner(System.in);
         }
 
     }//done
@@ -444,14 +477,43 @@ public class main {
         }
     }//done
 
-    public static void main(String[] args) {
-        main m = new main();
+    public void menu_utama() {
+        int pil = 0;
+        Scanner input = new Scanner(System.in);
         try {
-            m.testing_user();
-            m.login();
+            while (pil != 3) {
+                testing_user();
+                System.out.println("Welcome to friendsbook");
+                System.out.println("1. Registrasi");
+                System.out.println("2. Login");
+                System.out.println("3. Forget password  ");
+                System.out.println("4. Exit  ");
+                pil = input.nextInt();
+                switch (pil) {
+                    case 1:
+                        registrasi();
+                        break;
+                    case 2:
+                        login();
+                        break;
+                    case 3:
+                        break;
+                }
+
+            }
+        } catch (InputMismatchException e) {
+
+            System.out.print("Input harus integer");
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        main m = new main();
+        m.menu_utama();
+
     }//test 
 
 }
