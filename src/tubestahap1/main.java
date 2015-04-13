@@ -68,6 +68,7 @@ public class main {
         }
         //end password sama 
         System.out.println("Security Question : What is your favorite animal ?");
+        input.nextLine();
         String securityquestion = ("What is your favorite animal?");
         input.nextLine();
         System.out.println("6. Answer	: ");
@@ -92,8 +93,9 @@ public class main {
         String city = input.next();
         System.out.println("B. Enter your Nationality	: ");
         String nationality = input.next();
+        input.nextLine();
         System.out.println("C. Enter your FullAdress	: ");
-        String fulladress = input.next();
+        String fulladress = input.nextLine();
         acount people = new acount(nama, job, gender, username, password, securityanswer, securityquestion, startDate, email);
         people.setAlamat(city, nationality, fulladress);
         System.out.println("data pribadi berhasil di simpan ");
@@ -121,6 +123,7 @@ public class main {
                     break;
                 case 2:
                     //kirim pesan pada teman 
+                    input.nextLine();
                     System.out.println("tulis pesan anda");
                     String a = input.nextLine();
                     message m = new message(a, new Date(), people);
