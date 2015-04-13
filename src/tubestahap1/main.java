@@ -46,11 +46,10 @@ public class main {
             }
         }
         if (sama) {
-            System.out.println("Ok");
+            System.out.println("username dapat diterima ");
         } else {
             throw new Exception("Username sudah ada");
         }
-
         //end cek username ganda
         System.out.println("2. Nama 			: ");
         String nama = input.next();
@@ -229,10 +228,10 @@ public class main {
             System.out.println("Comment tekan 1 ");
             System.out.println("Like tekan 2 ");
             int cpm = input.nextInt();
-            
+            input.nextLine();
             switch (cpm) {
                 case 1:
-                    input.nextLine();
+                   
                     System.out.println("Masukan comment anda ");
                     String a = input.nextLine();
                     tmp.get(cl).setComment(a);
