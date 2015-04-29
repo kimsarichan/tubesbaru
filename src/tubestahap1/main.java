@@ -23,6 +23,7 @@ public class main {
     Scanner input = new Scanner(System.in);
 
     public void testing_user() {
+        //untuk ngetest 
         acount people = new acount("sari", "pelajar", "M", "saya", "bla", "bla", "bla", new Date(), "s@gmail.com");
         people.setAlamat("bandung", "indonesia", "riung ");
         list_akun.add(people);
@@ -31,6 +32,7 @@ public class main {
         list_akun.add(p);
         text b = new text("nooooo ", new Date());
         list_akun.get(0).addstatus(b);
+
     }
 
     public void registrasi() throws Exception {
@@ -67,7 +69,6 @@ public class main {
         }
         //end password sama 
         System.out.println("Security Question : What is your favorite animal ?");
-        input.nextLine();
         String securityquestion = ("What is your favorite animal?");
         input.nextLine();
         System.out.println("6. Answer	: ");
@@ -139,6 +140,7 @@ public class main {
         while (pil != 3) {
             System.out.println("1. Kirim pesan");
             System.out.println("2. Lihat pesan  ");
+            System.out.println("3. Exit  ");
             pil = input.nextInt();
             switch (pil) {
                 case 1:
@@ -182,6 +184,9 @@ public class main {
                 break;
             }
         }
+        if (tmp == null) {
+            throw new NullPointerException("Variable null ditemukan  ");
+        }
         return tmp;
     }// done 
 
@@ -199,55 +204,71 @@ public class main {
                 break;
             }
         }
+        if (tmp == null) {
+            throw new NullPointerException("Variable null ditemukan ");
+        }
         return tmp;
     }//done
 
     public void timeline(acount people) {
         try {
+            int cl;
             System.out.println("Timeline");
             int k = 1;
             ArrayList<text> tmp = new ArrayList<>();
             for (int i = 0; i < people.getNumberoffriend(); i++) {
-                for (int j = 0; j < people.getFriend(i).getStatus().size(); i++) {
-                    tmp.add(people.getFriend(i).getStatus().get(j));
-                    System.out.println(k + ". " + people.getFriend(i).getStatus().get(j).getT());
-                    System.out.println("jumlah like :" + people.getFriend(i).getStatus().get(j).getLike());
+                if (people.getStatus() != null) {
+                    for (text s : people.getFriend(i).getStatus()) {
+                        tmp.add(s);
+                        System.out.println(k + ". " + s.getT());
+                        System.out.println("jumlah like :" + s.getLike());
+                        k++;
+                    }
+                }
+            }
+            if (people.getStatus() != null) {
+                for (text s : people.getStatus()) {
+                    tmp.add(s);
+                    System.out.println(k + ". " + s.getT());
+                    System.out.println("jumlah like :" + s.getLike());
                     k++;
                 }
             }
-            for (text s : people.getStatus()) {
-                tmp.add(s);
-                System.out.println(k + ". " + s.getT());
-                System.out.println("jumlah like :" + s.getLike());
-                k++;
-            }
-            System.out.println("Comment atau like Status ");
-            System.out.println("Masukan nomor Status  ");
-            int cl = input.nextInt();
-            cl=cl-1;
-            System.out.println("Comment tekan 1 ");
-            System.out.println("Like tekan 2 ");
-            int cpm = input.nextInt();
-            input.nextLine();
-            switch (cpm) {
-                case 1:
-                   
-                    System.out.println("Masukan comment anda ");
-                    String a = input.nextLine();
-                    tmp.get(cl).setComment(a);
-                    System.out.println(tmp.get(cpm));
-                    if(tmp.get(cl).getComment()!= null){
-                        for (String c : tmp.get(cl).getComment()) {
-                            System.out.println(c);
+            System.out.println("Apakah anda ingin  comment atau like status(Y/N) ? ");
+            String pilihan = input.next();
+            //cek apakah user ingin melakukan comment atau like
+            if (pilihan.equalsIgnoreCase("Y")) {
+                System.out.println("Comment atau like Status ");
+                System.out.println("Masukan nomor Status  ");
+                cl = input.nextInt();
+                cl = cl - 1;
+                System.out.println("Comment tekan 1 ");
+                System.out.println("Like tekan 2 ");
+                int cpm = input.nextInt();
+                input.nextLine();
+                switch (cpm) {
+                    case 1:
+                        System.out.println("Masukan comment anda ");
+                        String a = input.nextLine();
+                        tmp.get(cl).setComment(a);
+                        System.out.println();
+                        System.out.println(tmp.get(cl).getComment().get(0));
+                        if (tmp.get(cl).getComment() != null) {
+                            System.out.println("Comment pada status ini");
+                            for (String c : tmp.get(cl).getComment()) {
+                                System.out.println(c);
+                            }
                         }
-                    }
-                    break;
-                case 2:
-                    tmp.get(cl).addlike();
-                    System.out.println("status berhasil di like ");
-                    break;
+                        break;
+                    case 2:
+                        tmp.get(cl).addlike();
+                        System.out.println("status berhasil di like ");
+                        break;
+                }
             }
+            //end check
         } catch (NullPointerException e) {
+            e.printStackTrace();
             System.out.println("Variable null ditemukan");
         } finally {
             Scanner input = new Scanner(System.in);
@@ -258,13 +279,14 @@ public class main {
     public void menu_grup(acount people, group grup) {
         int pil = 0;
         while (pil != 5) {
+            System.out.println();
             System.out.println(grup.getNama());
             System.out.println(grup.getDescription());
             System.out.println("1. Lihat timeline group");
             System.out.println("2. Lihat pesan group ");
             System.out.println("3. Kirim pesan group ");
             System.out.println("4. Lihat anggota group ");
-            System.out.println("5. Keluar ");
+            System.out.println("6. Keluar ");
             pil = input.nextInt();
             switch (pil) {
                 case 1:
@@ -275,6 +297,7 @@ public class main {
                         tmp.add(s);
                         System.out.println(k + " . " + s.getT());
                         System.out.println("jumlah like :" + s.getLike());
+
                         k++;
                     }
                     System.out.println("Comment atau like Status ");
@@ -289,9 +312,9 @@ public class main {
                             String a = input.nextLine();
                             tmp.get(cpm).setComment(a);
                             System.out.println(tmp.get(cpm));
-                            for (String c : tmp.get(cpm).getComment()) {
+                            tmp.get(cpm).getComment().stream().forEach((c) -> {
                                 System.out.println(c);
-                            }
+                            });
                             break;
                         case 2:
                             tmp.get(cpm).addlike();
@@ -303,7 +326,7 @@ public class main {
                     //melihat pesan yang ada pada grup
                     int a = 0;
                     for (message m : grup.getPesan()) {
-                        System.out.println(a + " . " + m.getP());
+                        System.out.println(a + " . " + m.getM());
                         a++;
                     }
                     break;
@@ -320,8 +343,13 @@ public class main {
                     //melihat daftar nama member pada grup
                     input.nextLine();
                     System.out.println("Daftar member  ");
-                    for (int i = 0; i < grup.getNumberofmember(); i++) {
-                        grup.getMember(i).getNama();
+                    System.out.println(grup.getAdmin().getNama());
+                    if (grup.getNumberofmember() != 0) {
+                        for (int i = 0; i < grup.getNumberofmember(); i++) {
+                            System.out.println(grup.getMember(i).getNama());
+                        }
+                    } else {
+                        System.out.println("tidak ada member , hanya ada admin");
                     }
                     break;
             }
@@ -369,9 +397,9 @@ public class main {
                                 System.out.println("nama :" + c.getNama());
                                 System.out.println("Tambahkan sebagai teman (Y/N) ?");
                                 String tambah = input.next();
-                                if ("Y".equals(tambah)) {
+                                if ("Y".equalsIgnoreCase(tambah)) {
                                     people.addfriend(c);
-                                } else if ("N".equals(tambah)) {
+                                } else if ("N".equalsIgnoreCase(tambah)) {
                                     System.out.println("Tidak jadi ditambahkan ");
                                 }
                             } catch (NullPointerException e) {
@@ -401,7 +429,7 @@ public class main {
                     //melakukan interaksi pada grup
                     System.out.println("1. Buat Grup baru   ");
                     System.out.println("2. Join Grup ");
-                    System.out.println("3. Lihat Grup yang diikuti ");
+                    System.out.println("3. Cari Grup yang diikuti ");
                     int g = input.nextInt();
                     switch (g) {
                         case 1:
@@ -409,12 +437,13 @@ public class main {
                             input.nextLine();
                             System.out.println("masukan nama grup      :");
                             String nama = input.nextLine();
-                            input.nextLine();
                             System.out.println("masukan deskripsi grup :");
                             String deskripsi = input.nextLine();
                             group grup = new group(people, nama, deskripsi, new Date());
                             list_grup.add(grup);
+
                             people.addgroup(grup);
+                            System.out.println(people.getgroup(0).getNama());
                             break;
                         case 2:
                             group gr = cari_group();
@@ -423,7 +452,9 @@ public class main {
 
                             break;
                         case 3:
+
                             System.out.println("masukan nama grup      :");
+                            input.nextLine();
                             String nama_grup = input.nextLine();
                             group groups = people.searchgrup(nama_grup);
                             menu_grup(people, groups);
@@ -483,7 +514,7 @@ public class main {
         int pil = 0;
         Scanner input = new Scanner(System.in);
         try {
-            while (pil != 3) {
+            while (pil != 4) {
                 testing_user();
                 System.out.println("Welcome to friendsbook");
                 System.out.println("1. Registrasi");
@@ -499,6 +530,11 @@ public class main {
                         login();
                         break;
                     case 3:
+                        acount p = cari_akun();
+                        input.nextLine();
+                        System.out.println(p.securityquestion);
+                        String s = input.nextLine();
+                        p.forgetpass();
                         break;
                 }
 

@@ -14,7 +14,7 @@ class text {
     public text(String t, Date tglkirim) {
         this.t = t;
         this.tglkirim = tglkirim;
-        ArrayList comment =new ArrayList<>();
+        comment =new ArrayList<String>();
     }
 
     //setter and getter
@@ -28,7 +28,8 @@ class text {
     
 
     public void setComment(String c) {
-        comment.add(c);
+        boolean add = comment.add(c);
+        
     }
 
     public int getLike() {

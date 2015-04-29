@@ -131,11 +131,10 @@ class profile {
         password = p;
     }
     //lupa password 
-    public void forgetpass(String securityans) {
+    public void forgetpass() {
         Scanner s = new Scanner(System.in);
-        System.out.println("jawab pertanyaan dibawah ini ");
         System.out.println(s.next());
-        if (securityans.equals(securityanswer)) {
+        if (s.equals(securityanswer)) {
             System.out.println("tulis password baru ");
             changepass(s.next());
         } else {
