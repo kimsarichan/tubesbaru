@@ -91,7 +91,6 @@ class acount extends profile implements Serializable {
     public void addfriend(acount f) {
         friend[numberoffriend] = f;
         numberoffriend = numberoffriend + 1;
-        notification += nama + " menambahkan " + friend[numberoffriend].getNama() + " sebagai teman ";
 
     }
 
