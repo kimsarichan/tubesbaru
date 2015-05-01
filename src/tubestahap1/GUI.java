@@ -2,6 +2,18 @@ package tubestahap1;
 
 import java.awt.CardLayout;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,13 +25,15 @@ import java.awt.CardLayout;
  * @author A450LC W8
  */
 public class GUI extends javax.swing.JFrame {
-
+    public Database db=new Database();
+    public acount activeaccount;
+   
     /**
      * Creates new form GUI
      */
-    GUI2 gui = new GUI2();
     public GUI() {
         initComponents();
+        
     }
 
     /**
@@ -37,8 +51,104 @@ public class GUI extends javax.swing.JFrame {
         TFieldUsername = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        chang = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        friendsbook = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        textusernamelogin = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        buttonlogin = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        buttonsignup = new javax.swing.JButton();
+        checksaveaccountlater = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        buttonremindme = new javax.swing.JButton();
+        passwordlogin = new javax.swing.JPasswordField();
+        home = new javax.swing.JPanel();
+        tabmenu = new javax.swing.JTabbedPane();
+        menuchat = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listrecentchat = new javax.swing.JList();
+        jLabel12 = new javax.swing.JLabel();
+        buttonnewchat = new javax.swing.JButton();
+        buttonselectchat = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        textchatfriendsname = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listfriendsname = new javax.swing.JList();
+        buttonapprovechat = new javax.swing.JButton();
+        buttonbacktochat = new javax.swing.JButton();
+        menufriends = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        listfriendlist = new javax.swing.JList();
+        jLabel16 = new javax.swing.JLabel();
+        buttonseeprofile = new javax.swing.JButton();
+        menutimeline = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listtimeline = new javax.swing.JList();
+        menugrup = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        buttoncreategroup = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listmygroup = new javax.swing.JList();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        listgroupchat = new javax.swing.JList();
+        menusearch = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        buttonfriendbyschool = new javax.swing.JButton();
+        buttonfriendbycity = new javax.swing.JButton();
+        buttonsearchgroup = new javax.swing.JButton();
+        buttonsearchbyusername = new javax.swing.JButton();
+        textsearchfriend = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        listsearchresult = new javax.swing.JList();
+        jLabel15 = new javax.swing.JLabel();
+        buttonjoinchat = new javax.swing.JButton();
+        buttonbacksearch = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        textactiveaccount = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        buttonclose = new javax.swing.JButton();
+        buttonhelp = new javax.swing.JButton();
+        signup = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        regnama = new javax.swing.JTextField();
+        regemail = new javax.swing.JTextField();
+        regusername = new javax.swing.JTextField();
+        regalamat = new javax.swing.JTextField();
+        regsekolah = new javax.swing.JTextField();
+        regpekerjaan = new javax.swing.JTextField();
+        reggender = new javax.swing.JTextField();
+        regsecq = new javax.swing.JComboBox();
+        regseca = new javax.swing.JTextField();
+        buttoncreateaccount = new javax.swing.JButton();
+        regpassword = new javax.swing.JPasswordField();
+        regpassword2 = new javax.swing.JPasswordField();
+        jLabel29 = new javax.swing.JLabel();
+        regday = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        regmonth = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        regyear = new javax.swing.JTextField();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -69,36 +179,700 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        chang.setText("change");
-        chang.addActionListener(new java.awt.event.ActionListener() {
+        jPanel8.setLayout(new java.awt.CardLayout());
+
+        jLabel1.setText("Welcome to Friendsbook");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
+
+        jLabel5.setText("Username");
+
+        jLabel6.setText("Password");
+
+        buttonlogin.setText("Login");
+        buttonlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changActionPerformed(evt);
+                buttonloginActionPerformed(evt);
             }
         });
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        jLabel7.setText("New On FriendsBook ??");
+
+        buttonsignup.setText("Sign Up");
+        buttonsignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonsignupActionPerformed(evt);
+            }
+        });
+
+        checksaveaccountlater.setText("Save my account later");
+        checksaveaccountlater.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checksaveaccountlaterActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Forgotten Your password ??");
+
+        buttonremindme.setText("Remind me");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textusernamelogin)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checksaveaccountlater)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(buttonlogin)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonsignup))
+                            .addComponent(jLabel8)
+                            .addComponent(buttonremindme))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(passwordlogin))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textusernamelogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonlogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checksaveaccountlater)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonsignup))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonremindme)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout friendsbookLayout = new javax.swing.GroupLayout(friendsbook);
+        friendsbook.setLayout(friendsbookLayout);
+        friendsbookLayout.setHorizontalGroup(
+            friendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(friendsbookLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
+            .addGroup(friendsbookLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        friendsbookLayout.setVerticalGroup(
+            friendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(friendsbookLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jPanel8.add(friendsbook, "friendsbook");
+
+        menuchat.setLayout(new java.awt.CardLayout());
+
+        listrecentchat.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listrecentchat);
+
+        jLabel12.setText("Recent Chat :");
+
+        buttonnewchat.setText("New Chat");
+        buttonnewchat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonnewchatActionPerformed(evt);
+            }
+        });
+
+        buttonselectchat.setText("Select");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(253, Short.MAX_VALUE)
+                .addComponent(buttonselectchat)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12)
+                                .addComponent(buttonnewchat))
+                            .addGap(0, 225, Short.MAX_VALUE)))
+                    .addContainerGap()))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 319, Short.MAX_VALUE)
+                .addComponent(buttonselectchat))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(buttonnewchat)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel12)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(32, Short.MAX_VALUE)))
+        );
+
+        menuchat.add(jPanel1, "menuchat");
+
+        jLabel11.setText("Enter FriendsName");
+
+        listfriendsname.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listfriendsname);
+
+        buttonapprovechat.setText("Chat");
+
+        buttonbacktochat.setText("back");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textchatfriendsname)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(buttonapprovechat)
+                            .addComponent(buttonbacktochat))
+                        .addGap(0, 213, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textchatfriendsname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonapprovechat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonbacktochat)
+                .addContainerGap(97, Short.MAX_VALUE))
+        );
+
+        menuchat.add(jPanel2, "new_chat");
+
+        tabmenu.addTab("Chat", menuchat);
+
+        listfriendlist.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane8.setViewportView(listfriendlist);
+
+        jLabel16.setText("Friends List");
+
+        buttonseeprofile.setText("See Profile");
+
+        javax.swing.GroupLayout menufriendsLayout = new javax.swing.GroupLayout(menufriends);
+        menufriends.setLayout(menufriendsLayout);
+        menufriendsLayout.setHorizontalGroup(
+            menufriendsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menufriendsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menufriendsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8)
+                    .addGroup(menufriendsLayout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menufriendsLayout.createSequentialGroup()
+                        .addGap(0, 221, Short.MAX_VALUE)
+                        .addComponent(buttonseeprofile)))
+                .addContainerGap())
+        );
+        menufriendsLayout.setVerticalGroup(
+            menufriendsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menufriendsLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonseeprofile)
+                .addContainerGap())
+        );
+
+        tabmenu.addTab("Friends", menufriends);
+
+        listtimeline.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(listtimeline);
+
+        jScrollPane4.setViewportView(jScrollPane3);
+
+        javax.swing.GroupLayout menutimelineLayout = new javax.swing.GroupLayout(menutimeline);
+        menutimeline.setLayout(menutimelineLayout);
+        menutimelineLayout.setHorizontalGroup(
+            menutimelineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menutimelineLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        menutimelineLayout.setVerticalGroup(
+            menutimelineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menutimelineLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tabmenu.addTab("Timeline", menutimeline);
+
+        menugrup.setLayout(new java.awt.CardLayout());
+
+        buttoncreategroup.setText("Create My Group");
+
+        jLabel13.setText("List my Group");
+
+        listmygroup.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(listmygroup);
+
+        jLabel14.setText("Group Chat");
+
+        listgroupchat.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane6.setViewportView(listgroupchat);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttoncreategroup)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
+                        .addGap(0, 189, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttoncreategroup)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        menugrup.add(jPanel5, "card2");
+
+        tabmenu.addTab("Group", menugrup);
+
+        menusearch.setLayout(new java.awt.CardLayout());
+
+        buttonfriendbyschool.setText("Search Friend by school");
+
+        buttonfriendbycity.setText("Search by city");
+
+        buttonsearchgroup.setText("Search group");
+
+        buttonsearchbyusername.setText("Search by username");
+        buttonsearchbyusername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonsearchbyusernameActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonfriendbyschool)
+                    .addComponent(buttonfriendbycity)
+                    .addComponent(buttonsearchgroup)
+                    .addComponent(buttonsearchbyusername)
+                    .addComponent(textsearchfriend, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(122, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textsearchfriend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonsearchbyusername)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonfriendbyschool)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonfriendbycity)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonsearchgroup)
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+
+        menusearch.add(jPanel6, "menusearching");
+
+        listsearchresult.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane7.setViewportView(listsearchresult);
+
+        jLabel15.setText("Search Result");
+
+        buttonjoinchat.setText("Add/Join chat");
+        buttonjoinchat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonjoinchatActionPerformed(evt);
+            }
+        });
+
+        buttonbacksearch.setText("Back");
+        buttonbacksearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonbacksearchActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(buttonjoinchat)
+                            .addComponent(buttonbacksearch))
+                        .addGap(0, 205, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jLabel15)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonjoinchat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonbacksearch)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+
+        menusearch.add(jPanel7, "resultsearch");
+
+        tabmenu.addTab("Search", menusearch);
+
+        jLabel9.setText("Me :");
+
+        textactiveaccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textactiveaccountActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("FriendsBook Account");
+
+        buttonclose.setText("x");
+
+        buttonhelp.setText("?");
+
+        javax.swing.GroupLayout homeLayout = new javax.swing.GroupLayout(home);
+        home.setLayout(homeLayout);
+        homeLayout.setHorizontalGroup(
+            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabmenu)
+            .addGroup(homeLayout.createSequentialGroup()
+                .addGroup(homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homeLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textactiveaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonhelp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonclose))
+        );
+        homeLayout.setVerticalGroup(
+            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeLayout.createSequentialGroup()
+                .addGroup(homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homeLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(textactiveaccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(homeLayout.createSequentialGroup()
+                        .addGroup(homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonclose)
+                            .addComponent(buttonhelp))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(tabmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel8.add(home, "home");
+
+        jLabel17.setText("Sign Up");
+
+        jLabel18.setText("Nama");
+
+        jLabel19.setText("Email");
+
+        jLabel20.setText("Username preferred");
+
+        jLabel21.setText("Password'");
+
+        jLabel22.setText("Re-type Password");
+
+        jLabel23.setText("Address");
+
+        jLabel24.setText("School");
+
+        jLabel25.setText("Job");
+
+        jLabel26.setText("Gender");
+
+        jLabel27.setText("Security Question");
+
+        jLabel28.setText("Security Answer");
+
+        regsecq.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "What the name of your dog ??", "Item 2", "Item 3", "Item 4" }));
+
+        buttoncreateaccount.setText("CREATE MY ACCOUNT");
+        buttoncreateaccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttoncreateaccountActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setText("Birthdate(dd-MM-yyyy)");
+
+        jLabel30.setText("-");
+
+        jLabel31.setText("-");
+
+        javax.swing.GroupLayout signupLayout = new javax.swing.GroupLayout(signup);
+        signup.setLayout(signupLayout);
+        signupLayout.setHorizontalGroup(
+            signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(signupLayout.createSequentialGroup()
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(signupLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(signupLayout.createSequentialGroup()
+                                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(signupLayout.createSequentialGroup()
+                                        .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel28)
+                                            .addComponent(jLabel27))
+                                        .addGap(45, 45, 45)
+                                        .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(signupLayout.createSequentialGroup()
+                                                .addComponent(regsecq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 8, Short.MAX_VALUE))
+                                            .addComponent(regseca)))
+                                    .addGroup(signupLayout.createSequentialGroup()
+                                        .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel22)
+                                            .addComponent(jLabel23)
+                                            .addComponent(jLabel24)
+                                            .addComponent(jLabel25)
+                                            .addComponent(jLabel26)
+                                            .addComponent(jLabel29))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(regpassword2)
+                                            .addComponent(regalamat)
+                                            .addComponent(regsekolah)
+                                            .addComponent(regpekerjaan)
+                                            .addComponent(reggender)
+                                            .addGroup(signupLayout.createSequentialGroup()
+                                                .addComponent(regday, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel30)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(regmonth, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel31)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(regyear, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(signupLayout.createSequentialGroup()
+                                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel20)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel17))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(regnama)
+                                    .addComponent(regemail)
+                                    .addComponent(regusername)
+                                    .addComponent(regpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(signupLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(buttoncreateaccount)))
+                .addContainerGap())
+        );
+        signupLayout.setVerticalGroup(
+            signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(signupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(regnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(regemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(regusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(regpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(regday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30)
+                    .addComponent(regmonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31)
+                    .addComponent(regyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(regpassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(regalamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(regsekolah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(regpekerjaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(reggender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(regsecq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(signupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(regseca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttoncreateaccount)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        jPanel8.add(signup, "signup");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(chang)
-                .addContainerGap(261, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chang)
-                .addGap(190, 190, 190))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,10 +886,169 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void changActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changActionPerformed
+    private void checksaveaccountlaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checksaveaccountlaterActionPerformed
         // TODO add your handling code here:
-       change();
-    }//GEN-LAST:event_changActionPerformed
+    }//GEN-LAST:event_checksaveaccountlaterActionPerformed
+
+    private void buttonloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonloginActionPerformed
+            db.connect();
+            String query= "select username, password from account where username='"+textusernamelogin.getText()+"'";
+            ResultSet rs=db.getData(query);
+            String passworddb=null;
+            String usernamedb=null;
+        try {
+            while(rs.next())
+            {
+                usernamedb=rs.getString("username");
+                passworddb = rs.getString("password");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String password= new String(passwordlogin.getPassword());
+        if(password.equals(passworddb))
+        {
+            String query2="select id_account,nama,email,birthdate,alamat,sekolah,pekerjaan,gender,security_question,security_answer from account where username='"+usernamedb+"'";
+            rs=db.getData(query2);   
+            try{
+                while(rs.next()){
+            int id_account=rs.getInt("id_account");
+            String nama=rs.getString("nama");
+            String email=rs.getString("email");
+            Date birthdate=rs.getDate("birthdate");
+            String alamat=rs.getString("alamat");
+            String sekolah=rs.getString("sekolah");
+            String pekerjaan=rs.getString("pekerjaan");
+            String gender= rs.getString("gender");
+            String securityQ=rs.getString("security_question");
+            String securityA=rs.getString("security_answer");
+            activeaccount=new acount(id_account,nama,email,usernamedb,password,birthdate,alamat,sekolah,pekerjaan,gender,securityQ,securityA);
+                }
+            }catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(this, "salah di bikin account", "Hoamm", JOptionPane.WARNING_MESSAGE);
+            }
+            catch(Exception e)
+            {JOptionPane.showMessageDialog(this, "entah dimana salahnya", "Hoamm", JOptionPane.WARNING_MESSAGE);}
+
+
+            db.close();
+            textactiveaccount.setText(activeaccount.getUsername());
+            CardLayout c= (CardLayout)jPanel8.getLayout();
+            c.show(jPanel8, "home");// TODO add your handling code here:
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Username dan password tidak cocok","Warning",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonloginActionPerformed
+
+    private void buttonnewchatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonnewchatActionPerformed
+        // TODO add your handling code here:
+        CardLayout c=(CardLayout) menuchat.getLayout();
+        c.show(menuchat,"new_chat");
+    }//GEN-LAST:event_buttonnewchatActionPerformed
+
+    private void buttonsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsignupActionPerformed
+        CardLayout c= (CardLayout) jPanel8.getLayout();
+        c.show(jPanel8,"signup");  // TODO add your handling code here:
+        
+    }//GEN-LAST:event_buttonsignupActionPerformed
+
+    private void buttoncreateaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoncreateaccountActionPerformed
+                                      
+            // TODO add your handling code here:
+            
+            String nama= regnama.getText();
+            String email=regemail.getText();
+            String username=regusername.getText();
+            String password1=new String(regpassword.getPassword());
+            String password2=new String(regpassword2.getPassword());
+            try{
+                
+                if(! password1.equals(password2))
+                {
+                    throw new Exception ("Password tidak sama");
+                }
+            }catch (Exception e)
+            {System.out.println(e.getMessage());}
+            String d=""+regyear.getText()+"-"+regmonth.getText()+"-"+regday.getText()+"";
+            String alamat= regalamat.getText();
+            String sekolah = regsekolah.getText();
+            String pekerjaan=regpekerjaan.getText();
+            String gender= reggender.getText();
+            String secq= regsecq.getSelectedItem().toString();
+            String seca=regseca.getText();
+      
+            db.connect();
+            String query="insert into account(nama,email,username,password,birthdate,alamat,sekolah,pekerjaan,gender,security_question,security_answer) values('"+nama+"','"+email+"','"+username+"','"+password1+"','"+d+"',"+alamat+"','"+sekolah+"','"+pekerjaan+"','"+gender+"','"+secq+"','"+seca+"')";
+            db.execute(query);
+            JOptionPane.showMessageDialog(this,"Username berhasil ditambahkan","Success",JOptionPane.INFORMATION_MESSAGE);
+            db.close();
+        
+    }//GEN-LAST:event_buttoncreateaccountActionPerformed
+
+    private void textactiveaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textactiveaccountActionPerformed
+    }//GEN-LAST:event_textactiveaccountActionPerformed
+
+    private void buttonsearchbyusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsearchbyusernameActionPerformed
+        // TODO add your handling code here:
+        String textsearch=textsearchfriend.getText();
+        db.connect();
+            String query = "Select username from account where username LIKE '%"+textsearch+"%' limit 10";
+            ResultSet rs= db.getData(query);
+            DefaultListModel lm=new DefaultListModel();
+            int i=0;
+        try {
+            while(rs.next())
+            {
+                lm.addElement(rs.getString("username"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listsearchresult.setModel(lm);
+        db.close();
+        CardLayout c = (CardLayout) menusearch.getLayout();
+        c.show(menusearch, "resultsearch");
+    }//GEN-LAST:event_buttonsearchbyusernameActionPerformed
+
+    private void buttonbacksearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonbacksearchActionPerformed
+        // TODO add your handling code here:
+        CardLayout c = (CardLayout) menusearch.getLayout();
+        c.show(menusearch, "menusearching");
+    }//GEN-LAST:event_buttonbacksearchActionPerformed
+
+    private void buttonjoinchatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonjoinchatActionPerformed
+            // TODO add your handling code here:
+            db.connect();
+            String query= "select id_account from account where username='"+listsearchresult.getSelectedValue().toString()+"'";
+            ResultSet rs=db.getData(query);
+            int i=0;
+            int idaccount_requested=0;
+            try{
+            while(rs.next())
+            {
+                idaccount_requested=rs.getInt("id_account");
+            }
+            String query2 = "insert into log_friend(time_log_friend,id_account1,id_account2) values (NOW(),'"+activeaccount.getIdacount()+"','"+idaccount_requested+"')";
+            i=db.execute(query2);
+            }catch(SQLException e)
+            {
+                JOptionPane.showMessageDialog(this,"Error di log friend","Hoamm",JOptionPane.WARNING_MESSAGE);
+            }
+            if(i>0)
+            {
+                JOptionPane.showMessageDialog(this,"Friend berhasil ditambahkan.. Waiting for approve","Adding friend", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"Friend gagal ditambahkan","Adding friend", JOptionPane.WARNING_MESSAGE);
+                
+            }
+            db.close();
+        
+    }//GEN-LAST:event_buttonjoinchatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,16 +1087,109 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TFieldUsername;
-    private javax.swing.JButton chang;
+    private javax.swing.JButton buttonapprovechat;
+    private javax.swing.JButton buttonbacksearch;
+    private javax.swing.JButton buttonbacktochat;
+    private javax.swing.JButton buttonclose;
+    private javax.swing.JButton buttoncreateaccount;
+    private javax.swing.JButton buttoncreategroup;
+    private javax.swing.JButton buttonfriendbycity;
+    private javax.swing.JButton buttonfriendbyschool;
+    private javax.swing.JButton buttonhelp;
+    private javax.swing.JButton buttonjoinchat;
+    private javax.swing.JButton buttonlogin;
+    private javax.swing.JButton buttonnewchat;
+    private javax.swing.JButton buttonremindme;
+    private javax.swing.JButton buttonsearchbyusername;
+    private javax.swing.JButton buttonsearchgroup;
+    private javax.swing.JButton buttonseeprofile;
+    private javax.swing.JButton buttonselectchat;
+    private javax.swing.JButton buttonsignup;
+    private javax.swing.JCheckBox checksaveaccountlater;
+    private javax.swing.JPanel friendsbook;
+    private javax.swing.JPanel home;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JList listfriendlist;
+    private javax.swing.JList listfriendsname;
+    private javax.swing.JList listgroupchat;
+    private javax.swing.JList listmygroup;
+    private javax.swing.JList listrecentchat;
+    private javax.swing.JList listsearchresult;
+    private javax.swing.JList listtimeline;
+    private javax.swing.JPanel menuchat;
+    private javax.swing.JPanel menufriends;
+    private javax.swing.JPanel menugrup;
+    private javax.swing.JPanel menusearch;
+    private javax.swing.JPanel menutimeline;
+    private javax.swing.JPasswordField passwordlogin;
+    private javax.swing.JTextField regalamat;
+    private javax.swing.JTextField regday;
+    private javax.swing.JTextField regemail;
+    private javax.swing.JTextField reggender;
+    private javax.swing.JTextField regmonth;
+    private javax.swing.JTextField regnama;
+    private javax.swing.JPasswordField regpassword;
+    private javax.swing.JPasswordField regpassword2;
+    private javax.swing.JTextField regpekerjaan;
+    private javax.swing.JTextField regseca;
+    private javax.swing.JComboBox regsecq;
+    private javax.swing.JTextField regsekolah;
+    private javax.swing.JTextField regusername;
+    private javax.swing.JTextField regyear;
+    private javax.swing.JPanel signup;
+    private javax.swing.JTabbedPane tabmenu;
+    private javax.swing.JTextField textactiveaccount;
+    private javax.swing.JTextField textchatfriendsname;
+    private javax.swing.JTextField textsearchfriend;
+    private javax.swing.JTextField textusernamelogin;
     // End of variables declaration//GEN-END:variables
-    public void change(){
-//        this.dispose();
-        gui.setVisible(true);
-    }
+    
 }
