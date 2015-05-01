@@ -13,17 +13,24 @@ class acount extends profile implements Serializable {
     private ArrayList<text> status;
     private int numberoffriend;
     private int numberofgroup;
-    private String notification;
+    private int idacount;
+    private String alamat;
+    private String sekolah;
+    private String securityquestion;
+    private String securityanwer;
+    private String notification;//hapus
 
-    public acount(String nama, String job, String gender, String username, String password, String securityanswer, String securityquestion, Date tanggal, String email) {
+    public acount(int idacount,String nama,String email, String username, String password, Date tanggal,String alamat, String sekolah, String job, String gender,String securityquestion, String securityanswer  ) {
         super(nama, job, gender, username, password, securityanswer, securityquestion, tanggal, email);
         friend = new acount[100];
         grup = new group[100];
         pesan = new ArrayList<>();
-        status = new ArrayList<>(); //status
+        status = new ArrayList<>();//status
+        this.idacount=idacount;
     }
 
     //setter dan getter 
+    
     public int getNumberoffriend() {
         return numberoffriend;
     }
@@ -132,6 +139,13 @@ class acount extends profile implements Serializable {
             throw new notfoundexception("grup tidak ditemukan");
         }
 
+    }
+
+    /**
+     * @return the idacount
+     */
+    public int getIdacount() {
+        return idacount;
     }
 
 }
