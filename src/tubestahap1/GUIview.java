@@ -5,6 +5,8 @@
  */
 package tubestahap1;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author fujitsu
@@ -14,10 +16,10 @@ public class GUIview extends javax.swing.JFrame {
     /**
      * Creates new form GUIview
      */
+    
     public GUIview() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,32 +29,47 @@ public class GUIview extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textviewedaccount = new javax.swing.JTextField();
+        textviewidaccount = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textdescription = new javax.swing.JTextArea();
+        status_description = new javax.swing.JTextArea();
         buttonlike = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         textcommentlist = new javax.swing.JTextArea();
         textsetcomment = new javax.swing.JTextField();
         buttoncomment = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        j_like = new javax.swing.JLabel();
+        id_status_label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        textviewedaccount.setText("(Account Pembuat)");
+        textviewidaccount.setEditable(false);
+        textviewidaccount.setText("(Account Pembuat)");
 
-        textdescription.setColumns(20);
-        textdescription.setRows(5);
-        jScrollPane1.setViewportView(textdescription);
+        status_description.setEditable(false);
+        status_description.setColumns(20);
+        status_description.setRows(5);
+        jScrollPane1.setViewportView(status_description);
 
         buttonlike.setText("Like");
+        buttonlike.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonlikeActionPerformed(evt);
+            }
+        });
 
+        textcommentlist.setEditable(false);
         textcommentlist.setColumns(20);
         textcommentlist.setRows(5);
         jScrollPane2.setViewportView(textcommentlist);
 
-        textsetcomment.setText(")set commetn");
-
         buttoncomment.setText("Comment");
+
+        jLabel1.setText("Jumlah Like ");
+
+        j_like.setText("0");
+
+        id_status_label.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,25 +81,36 @@ public class GUIview extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textviewedaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonlike))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(textviewidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(id_status_label)
+                        .addGap(10, 10, 10))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textsetcomment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttoncomment)))
+                        .addComponent(buttoncomment))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonlike)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(j_like, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textviewedaccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textviewidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_status_label))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonlike)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonlike)
+                    .addComponent(jLabel1)
+                    .addComponent(j_like))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -94,6 +122,12 @@ public class GUIview extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void buttonlikeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonlikeActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_buttonlikeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,12 +166,15 @@ public class GUIview extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttoncomment;
-    private javax.swing.JButton buttonlike;
+    public static javax.swing.JButton buttonlike;
+    public javax.swing.JLabel id_status_label;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JLabel j_like;
+    public static javax.swing.JTextArea status_description;
     private javax.swing.JTextArea textcommentlist;
-    private javax.swing.JTextArea textdescription;
     private javax.swing.JTextField textsetcomment;
-    private javax.swing.JTextField textviewedaccount;
+    public static javax.swing.JTextField textviewidaccount;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,8 +15,10 @@ public class GUI2 extends javax.swing.JFrame {
     /**
      * Creates new form GUI2
      */
-    public GUI2() {
+    public GUI2(String start_chat_username) {
+        
         initComponents();
+        this.textfriendschatted.setText(start_chat_username);
     }
 
     /**
@@ -58,6 +60,12 @@ public class GUI2 extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.CardLayout());
 
         textfriendschatted.setText("(Friend)");
+        textfriendschatted.setEnabled(false);
+        textfriendschatted.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textfriendschattedActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("To:");
 
@@ -274,11 +282,16 @@ public class GUI2 extends javax.swing.JFrame {
 
     private void buttonlistnotespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonlistnotespActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_buttonlistnotespActionPerformed
 
     private void buttonmakenotespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonmakenotespActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonmakenotespActionPerformed
+
+    private void textfriendschattedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfriendschattedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textfriendschattedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,7 +323,7 @@ public class GUI2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI2().setVisible(true);
+                new GUI2(null).setVisible(true);
             }
         });
     }

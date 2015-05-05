@@ -5,31 +5,71 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-class acount extends profile implements Serializable {
-
+class acount implements Serializable {
+    private int idacount;
+    protected String nama;
+    protected String email;
+    public String username;
+    private String password;
+    protected Date birthdate;
+    private String alamat;
+    private String sekolah;
+    protected String job;
+    protected String gender;
     private acount friend[];
     private group grup[];
+    private String securityquestion;
+    private String securityanswer;
     private ArrayList<message> pesan;
     private ArrayList<text> status;
     private int numberoffriend;
     private int numberofgroup;
-    private int idacount;
-    private String alamat;
-    private String sekolah;
-    private String securityquestion;
-    private String securityanwer;
-    private String notification;//hapus
+    
+   // private String notification;//hapus
 
     public acount(int idacount,String nama,String email, String username, String password, Date tanggal,String alamat, String sekolah, String job, String gender,String securityquestion, String securityanswer  ) {
-        super(nama, job, gender, username, password, securityanswer, securityquestion, tanggal, email);
+        this.idacount=idacount;
+        this.nama=nama;
+        this.email=email;
+        this.username=username;
+        this.password=password;
+        this.birthdate=tanggal;
+        this.alamat=alamat;
+        this.sekolah=sekolah;
+        this.job=job;
+        this.gender=gender;
+        this.securityquestion=securityquestion;
+        this.securityanswer=securityanswer;
+                
         friend = new acount[100];
         grup = new group[100];
         pesan = new ArrayList<>();
         status = new ArrayList<>();//status
+    }
+    public acount(int idacount, String nama,String username)
+    {
         this.idacount=idacount;
+        this.nama=nama;
+        this.username=username;
     }
 
     //setter dan getter 
+    
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getIdacount() {
+        return idacount;
+    }
+    public String getUsername()
+    {
+        return username;
+    }
     
     public int getNumberoffriend() {
         return numberoffriend;
@@ -56,16 +96,27 @@ class acount extends profile implements Serializable {
         return grup[id];
     }
 
-    public String getNotification() {
+    /*public String getNotification() {
         return notification;
     }
 
     public void setNotification(String notification) {
         this.notification = notification;
-    }
-
+    }*/
+    
+  
     public acount getFriend(int id) {
         return friend[id];
+    }
+    public boolean isFriend(int id)
+    {
+        boolean exist=false;
+        for (int i=0;i<numberoffriend;i++)
+        {
+            if(friend[i].getIdacount()==id)
+                exist=true;
+        }
+        return exist;
     }
 
     public ArrayList<message> getPesan() {
@@ -113,12 +164,9 @@ class acount extends profile implements Serializable {
             }
             i++;
         }
-        if (ketemu == true) {
+        if (ketemu == true) 
             return a;
-        } else {
-            throw new notfoundexception("teman tidak ditemukan");
-        }
-
+        return a;
     }
 
     //mencari grup
@@ -144,8 +192,6 @@ class acount extends profile implements Serializable {
     /**
      * @return the idacount
      */
-    public int getIdacount() {
-        return idacount;
-    }
+    
 
 }

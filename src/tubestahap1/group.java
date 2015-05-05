@@ -6,7 +6,8 @@ import java.io.*;
 
 
 class group implements Serializable {
-
+    
+    private int id_group;
     private acount member[] = new acount[100];
     private acount admin;
     private ArrayList<message> pesan = new ArrayList<>();
@@ -16,14 +17,26 @@ class group implements Serializable {
     private String description;
     private Date tglberdiri;
     //constructor
-    public group(acount admin, String nama, String description, Date tglberdiri) {
+    public group(int id_group,acount admin, String nama, String description, Date tglberdiri) {
+        this.id_group=id_group;
         this.admin = admin;
         this.nama = nama;
         this.description = description;
         this.tglberdiri = tglberdiri;
     }
+    public group(int id_group,String nama,String desc){
+        this.id_group=id_group;
+        this.nama=nama;
+        this.description=desc;
+    }
+
 
     //setter and getter
+    public int getIdgroup()
+    {
+        return id_group;
+        
+    }  
     public acount getAdmin() {
         return admin;
     }

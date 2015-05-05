@@ -5,19 +5,46 @@ import java.util.*;
 
 class text {
 
-    protected String t;
-    protected ArrayList<String> comment ;
-    protected int like;
-    protected Date tglkirim;
+    private String t;
+    private ArrayList<String> comment ;
+    private int like;
+    private Date tglkirim;
+    private String nama ;
+    private int id_status;
 
     //constructor
-    public text(String t, Date tglkirim) {
+    public text(int id_status ,String nama, String t, Date tglkirim) {
+        this.nama=nama;
+        this.t = t;
+        this.tglkirim = tglkirim;
+        comment =new ArrayList<String>();
+        this.id_status=id_status;
+    }
+     public text(String nama, String t, Date tglkirim) {
+        this.nama=nama;
         this.t = t;
         this.tglkirim = tglkirim;
         comment =new ArrayList<String>();
     }
 
     //setter and getter
+    
+    public int getId_status() {
+        return id_status;
+    }
+
+    public void setId_status(int id_status) {
+        this.id_status = id_status;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
     public String getT() {
         return t;
     }
@@ -57,4 +84,9 @@ class text {
         like = like - 1;
     }
 
+    @Override
+    public String toString() {
+        return "("+getTglkirim()+")"+getNama()+" : "+" "+getT();
+    }
+    
 }

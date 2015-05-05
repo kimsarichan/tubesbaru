@@ -5,16 +5,25 @@
  */
 package tubestahap1;
 
+import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fujitsu
  */
 public class GUIprofile extends javax.swing.JFrame {
-
+    Database db;
+    ResultSet rs;
     /**
      * Creates new form GUIprofile
      */
     public GUIprofile() {
+        db=new Database();
         initComponents();
     }
 
@@ -27,6 +36,8 @@ public class GUIprofile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        profileswitch = new javax.swing.JPanel();
+        profilefriendsbook = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         textprofileusername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -35,23 +46,61 @@ public class GUIprofile extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listprofiletimeline = new javax.swing.JList();
-        textprofilegender = new javax.swing.JTextField();
+        textprofilenama = new javax.swing.JTextField();
         textprofilejob = new javax.swing.JTextField();
-        textprofilealamat = new javax.swing.JTextField();
+        profileidaccount = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        textprofilesekolah = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textprofilealamat = new javax.swing.JTextArea();
+        profilegroup = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        textprofileadminusername = new javax.swing.JTextField();
+        textprofilenamagroup = new javax.swing.JTextField();
+        textpofiletglgroup = new javax.swing.JTextField();
+        profileidgroup = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textpofiledescgoup = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        profileswitch.setLayout(new java.awt.CardLayout());
+
+        profilefriendsbook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profilefriendsbookMouseClicked(evt);
+            }
+        });
+        profilefriendsbook.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                profilefriendsbookComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Friendsbook username");
 
-        textprofileusername.setText("jTextField1");
+        textprofileusername.setEnabled(false);
+        textprofileusername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textprofileusernameActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Profile");
 
-        jLabel3.setText("Gender");
+        jLabel3.setText("Nama");
 
         jLabel4.setText("Job");
 
-        jLabel5.setText("Alamat");
+        jLabel5.setText("Timeline");
 
         listprofiletimeline.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -60,65 +109,296 @@ public class GUIprofile extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listprofiletimeline);
 
-        textprofilegender.setText("jTextField2");
+        textprofilenama.setEnabled(false);
 
-        textprofilejob.setText("jTextField3");
+        textprofilejob.setEnabled(false);
 
-        textprofilealamat.setText("jTextField4");
+        profileidaccount.setEnabled(false);
+        profileidaccount.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                profileidaccountComponentAdded(evt);
+            }
+        });
+
+        jLabel12.setText("Alamat");
+
+        jLabel13.setText("Sekolah");
+
+        textprofilesekolah.setEnabled(false);
+        textprofilesekolah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textprofilesekolahActionPerformed(evt);
+            }
+        });
+
+        textprofilealamat.setColumns(20);
+        textprofilealamat.setRows(3);
+        textprofilealamat.setEnabled(false);
+        jScrollPane3.setViewportView(textprofilealamat);
+
+        javax.swing.GroupLayout profilefriendsbookLayout = new javax.swing.GroupLayout(profilefriendsbook);
+        profilefriendsbook.setLayout(profilefriendsbookLayout);
+        profilefriendsbookLayout.setHorizontalGroup(
+            profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profilefriendsbookLayout.createSequentialGroup()
+                        .addGap(0, 336, Short.MAX_VALUE)
+                        .addComponent(profileidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                        .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textprofilenama, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel13))
+                                .addGap(83, 83, 83)
+                                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textprofilesekolah)
+                                    .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                                        .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(51, 51, 51)))
+                .addContainerGap())
+            .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3))
+                    .addContainerGap(318, Short.MAX_VALUE)))
+        );
+        profilefriendsbookLayout.setVerticalGroup(
+            profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                .addComponent(profileidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textprofilenama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                        .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(textprofilesekolah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addGap(5, 5, 5))
+                    .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel2)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel3)
+                    .addContainerGap(397, Short.MAX_VALUE)))
+        );
+
+        profileswitch.add(profilefriendsbook, "profilefriendsbook");
+
+        profilegroup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profilegroupMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setText("Profile Group");
+
+        jLabel7.setText("Nama group");
+
+        jLabel8.setText("Deskripsi group");
+
+        jLabel9.setText("Tanggal berdiri");
+
+        jLabel10.setText("Admin");
+
+        jLabel11.setText("member");
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
+
+        textprofileadminusername.setEnabled(false);
+
+        textprofilenamagroup.setEnabled(false);
+
+        textpofiletglgroup.setEnabled(false);
+
+        profileidgroup.setEnabled(false);
+
+        textpofiledescgoup.setColumns(20);
+        textpofiledescgoup.setRows(3);
+        textpofiledescgoup.setEnabled(false);
+        jScrollPane4.setViewportView(textpofiledescgoup);
+
+        javax.swing.GroupLayout profilegroupLayout = new javax.swing.GroupLayout(profilegroup);
+        profilegroup.setLayout(profilegroupLayout);
+        profilegroupLayout.setHorizontalGroup(
+            profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilegroupLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(profilegroupLayout.createSequentialGroup()
+                        .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(profilegroupLayout.createSequentialGroup()
+                                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel7))
+                                .addGap(30, 30, 30)
+                                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textprofileadminusername, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                    .addComponent(textprofilenamagroup))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(profileidgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(profilegroupLayout.createSequentialGroup()
+                        .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(profilegroupLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(profilegroupLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(textpofiletglgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11))
+                        .addGap(0, 43, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        profilegroupLayout.setVerticalGroup(
+            profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profilegroupLayout.createSequentialGroup()
+                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(profilegroupLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6))
+                    .addComponent(profileidgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(textprofileadminusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(textprofilenamagroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(profilegroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(textpofiletglgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        profileswitch.add(profilegroup, "profilegroup");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textprofilealamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textprofilegender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 209, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(profileswitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(textprofilegender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textprofilealamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(profileswitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void profilefriendsbookComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_profilefriendsbookComponentShown
+
+    }//GEN-LAST:event_profilefriendsbookComponentShown
+
+    private void textprofileusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textprofileusernameActionPerformed
+       
+    }//GEN-LAST:event_textprofileusernameActionPerformed
+
+    private void textprofilesekolahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textprofilesekolahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textprofilesekolahActionPerformed
+
+    private void profileidaccountComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_profileidaccountComponentAdded
+        
+        
+    }//GEN-LAST:event_profileidaccountComponentAdded
+
+    private void profilefriendsbookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilefriendsbookMouseClicked
+        db.connect();
+        int idprofile=Integer.parseInt(profileidaccount.getText());
+        String query="select nama,username,alamat,sekolah,pekerjaan from account where id_account="+idprofile+"";
+        rs= db.getData(query);
+        String nama=null,username=null,alamat=null,sekolah=null,pekerjaan=null;
+        try {
+            while(rs.next())
+            {
+                nama= rs.getString("nama");
+                username=rs.getString("username");
+                alamat=rs.getString("alamat");
+                sekolah = rs.getString("sekolah");
+                pekerjaan= rs.getString("pekerjaan");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUIprofile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        textprofileusername.setText(username);
+        textprofilenama.setText(nama);
+        textprofilealamat.setText(alamat);
+        textprofilesekolah.setText(sekolah);
+        textprofilejob.setText(pekerjaan);
+    db.close();
+    }//GEN-LAST:event_profilefriendsbookMouseClicked
+
+    private void profilegroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilegroupMouseClicked
+        db.connect();
+        String query ="select `group`.`time_group`,`account`.`username`,`group`.`group_name`,`group`.`group_desc` from `group` join `account` where `group`.`id_group`="+Integer.parseInt(profileidgroup.getText())+" && `group`.`group_admin_idaccount`=`account`.`id_account` ";
+        ResultSet rs= db.getData(query);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String datestring = dateFormat.format(date); 
+        try{
+            while(rs.next()){
+            textpofiletglgroup.setText(datestring);
+            textprofileusername.setText(rs.getString("username"));
+            textprofilenamagroup.setText(rs.getString("group_name"));
+            textpofiledescgoup.setText(rs.getString("group_desc"));
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(GUIprofile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        db.close();
+    }//GEN-LAST:event_profilegroupMouseClicked
 
     /**
      * @param args the command line arguments
@@ -157,15 +437,37 @@ public class GUIprofile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList listprofiletimeline;
-    private javax.swing.JTextField textprofilealamat;
-    private javax.swing.JTextField textprofilegender;
+    private javax.swing.JPanel profilefriendsbook;
+    private javax.swing.JPanel profilegroup;
+    public static javax.swing.JTextField profileidaccount;
+    public static javax.swing.JTextField profileidgroup;
+    public static javax.swing.JPanel profileswitch;
+    private javax.swing.JTextArea textpofiledescgoup;
+    private javax.swing.JTextField textpofiletglgroup;
+    private javax.swing.JTextField textprofileadminusername;
+    private javax.swing.JTextArea textprofilealamat;
     private javax.swing.JTextField textprofilejob;
+    private javax.swing.JTextField textprofilenama;
+    private javax.swing.JTextField textprofilenamagroup;
+    private javax.swing.JTextField textprofilesekolah;
     private javax.swing.JTextField textprofileusername;
     // End of variables declaration//GEN-END:variables
 }
