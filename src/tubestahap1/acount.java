@@ -54,6 +54,94 @@ class acount implements Serializable {
     }
 
     //setter dan getter 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getSekolah() {
+        return sekolah;
+    }
+
+    public void setSekolah(String sekolah) {
+        this.sekolah = sekolah;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public acount[] getFriend() {
+        return friend;
+    }
+
+    public void setFriend(acount[] friend) {
+        this.friend = friend;
+    }
+
+    public group[] getGrup() {
+        return grup;
+    }
+
+    public void setGrup(group[] grup) {
+        this.grup = grup;
+    }
+
+    public String getSecurityquestion() {
+        return securityquestion;
+    }
+
+    public void setSecurityquestion(String securityquestion) {
+        this.securityquestion = securityquestion;
+    }
+
+    public String getSecurityanswer() {
+        return securityanswer;
+    }
+
+    public void setSecurityanswer(String securityanswer) {
+        this.securityanswer = securityanswer;
+    }
+    
     
     public String getNama() {
         return nama;
