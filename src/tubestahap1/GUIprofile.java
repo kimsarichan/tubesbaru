@@ -9,6 +9,7 @@ import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 public class GUIprofile extends javax.swing.JFrame {
     Database db;
     ResultSet rs;
+    acount activeaccount;
     /**
      * Creates new form GUIprofile
      */
@@ -26,7 +28,6 @@ public class GUIprofile extends javax.swing.JFrame {
         db=new Database();
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,62 +145,68 @@ public class GUIprofile extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profilefriendsbookLayout.createSequentialGroup()
-                        .addGap(0, 336, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(profileidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1)
-                    .addGroup(profilefriendsbookLayout.createSequentialGroup()
-                        .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(profilefriendsbookLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textprofilenama, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profilefriendsbookLayout.createSequentialGroup()
+                        .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(profilefriendsbookLayout.createSequentialGroup()
                                 .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel13))
-                                .addGap(83, 83, 83)
+                                .addGap(103, 103, 103)
                                 .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textprofilesekolah)
                                     .addGroup(profilefriendsbookLayout.createSequentialGroup()
                                         .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(51, 51, 51)))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, profilefriendsbookLayout.createSequentialGroup()
+                                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textprofilenama, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(41, 41, 41)))
                 .addContainerGap())
             .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(profilefriendsbookLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel3))
-                    .addContainerGap(318, Short.MAX_VALUE)))
+                    .addComponent(jLabel1)
+                    .addContainerGap(328, Short.MAX_VALUE)))
         );
         profilefriendsbookLayout.setVerticalGroup(
             profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profilefriendsbookLayout.createSequentialGroup()
-                .addComponent(profileidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(profileidaccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textprofileusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textprofilenama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textprofilenama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(profilefriendsbookLayout.createSequentialGroup()
-                        .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(textprofilesekolah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(5, 5, 5))
-                    .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(profilefriendsbookLayout.createSequentialGroup()
+                        .addComponent(textprofilesekolah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textprofilejob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,13 +214,9 @@ public class GUIprofile extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(profilefriendsbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(profilefriendsbookLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel2)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(31, 31, 31)
                     .addComponent(jLabel1)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel3)
-                    .addContainerGap(397, Short.MAX_VALUE)))
+                    .addContainerGap(417, Short.MAX_VALUE)))
         );
 
         profileswitch.add(profilefriendsbook, "profilefriendsbook");
@@ -288,7 +291,7 @@ public class GUIprofile extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(textpofiletglgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11))
-                        .addGap(0, 43, Short.MAX_VALUE)))
+                        .addGap(0, 53, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         profilegroupLayout.setVerticalGroup(
@@ -357,6 +360,7 @@ public class GUIprofile extends javax.swing.JFrame {
     private void profilefriendsbookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilefriendsbookMouseClicked
         db.connect();
         int idprofile=Integer.parseInt(profileidaccount.getText());
+        timeline t= new timeline(activeaccount);
         String query="select nama,username,alamat,sekolah,pekerjaan from account where id_account="+idprofile+"";
         rs= db.getData(query);
         String nama=null,username=null,alamat=null,sekolah=null,pekerjaan=null;
@@ -377,7 +381,30 @@ public class GUIprofile extends javax.swing.JFrame {
         textprofilealamat.setText(alamat);
         textprofilesekolah.setText(sekolah);
         textprofilejob.setText(pekerjaan);
-    db.close();
+        ArrayList<text>  list= new ArrayList();
+        try {
+            db.connect();
+            String query2="SELECT id_status , nama, status_desc, tanggal\n" +
+            "FROM \n" +
+            "STATUS JOIN account\n" +
+            "USING ( id_account ) \n" +
+            "WHERE status.id_account IN ( \n" +
+            "SELECT id_account2\n" +
+            "FROM log_friend\n" +
+            "WHERE id_account1 ="+Integer.parseInt( profileidaccount.getText())+" ) \n" +
+            "OR id_account ="+ Integer.parseInt( profileidaccount.getText()) +"\n" + "OR id_account IN (SELECT id_account1 from log_friend WHERE id_account2 ="+Integer.parseInt( profileidaccount.getText())+") ORDER BY id_status  DESC ";
+            ResultSet rs = db.getData(query2);
+            while(rs.next()){
+                text stat = new text(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getDate(4));
+                list.add(stat);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(timeline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        db.close();
+        
+        db.close();
     }//GEN-LAST:event_profilefriendsbookMouseClicked
 
     private void profilegroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilegroupMouseClicked
@@ -403,37 +430,7 @@ public class GUIprofile extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIprofile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIprofile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIprofile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIprofile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIprofile().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

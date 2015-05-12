@@ -8,14 +8,30 @@ class message {
 
     String m;
     Date tgl;
-    acount p;
+    acount p;//pengirim
+    acount r;//receiver
 
-    public message(String m, Date tgl, acount p) {
+    public message(String m, Date tgl, acount p,acount r) {
         this.m = m;
         this.tgl = tgl;
         this.p = p;
+        this.r=r;
+    }
+    
+    public message(String m , Date tgl ){
+        this.m=m;
+        this.tgl=tgl;
     }
 
+    public acount getR() {
+        return r;
+    }
+
+    public void setR(acount r) {
+        this.r = r;
+    }
+
+    
     public String getM() {
         return m;
     }
@@ -39,6 +55,13 @@ class message {
     public void setP(acount pengirim) {
         this.p = pengirim;
     }
+
+    @Override
+    public String toString() {
+        return "message(" + "m=" + m + "/ tgl=" + tgl + ')';
+    }
+    
+
 
 
     

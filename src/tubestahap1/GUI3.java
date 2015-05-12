@@ -6,6 +6,12 @@
 package tubestahap1;
 
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,14 +19,19 @@ import java.awt.CardLayout;
  */
 public class GUI3 extends javax.swing.JFrame {
     
+      DefaultListModel lm;
+    Database db=new Database();
+    acount active;
+    message_database db_pesan ;
     /**
      
      */
-    public GUI3() {
-        
+    public GUI3(acount acc) {
+        this.active=acc;
         initComponents();
     }
 
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,28 +49,29 @@ public class GUI3 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textchattingg = new javax.swing.JTextArea();
-        buttonmakenotesg = new javax.swing.JButton();
-        buttonlistnotesg = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        textgroupchatted = new javax.swing.JTextField();
         idgroupchatted = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        texttitlenotesg = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textnotesg = new javax.swing.JTextArea();
-        buttonmakenotes2 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        listnotes = new javax.swing.JList();
+        idaccounttogroup = new javax.swing.JLabel();
+        textgroupchatted = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listfriendinvitegroup = new javax.swing.JList();
+        textnamainvitegroup = new javax.swing.JTextField();
+        buttonsearchinvitegroup = new javax.swing.JButton();
+        buttoninvitegroup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         buttonsendmessageg.setText(">>");
+        buttonsendmessageg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonsendmessagegActionPerformed(evt);
+            }
+        });
 
         textmessageg.setColumns(20);
         textmessageg.setRows(3);
@@ -71,11 +83,12 @@ public class GUI3 extends javax.swing.JFrame {
         textchattingg.setRows(5);
         jScrollPane1.setViewportView(textchattingg);
 
-        buttonmakenotesg.setText("Make Notes");
-
-        buttonlistnotesg.setText("List Notes");
-
         jButton1.setText("Invite member ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("View Group profile");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,9 +97,9 @@ public class GUI3 extends javax.swing.JFrame {
             }
         });
 
-        textgroupchatted.setEnabled(false);
-
         idgroupchatted.setText("ID");
+
+        idaccounttogroup.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -97,17 +110,17 @@ public class GUI3 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(idgroupchatted, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textgroupchatted))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonlistnotesg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonmakenotesg)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(idgroupchatted, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(idaccounttogroup, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(textgroupchatted, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -125,13 +138,12 @@ public class GUI3 extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(idgroupchatted, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonmakenotesg)
-                    .addComponent(buttonlistnotesg)
-                    .addComponent(textgroupchatted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(idgroupchatted, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idaccounttogroup))
+                .addGap(18, 18, 18)
+                .addComponent(textgroupchatted, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
@@ -151,84 +163,72 @@ public class GUI3 extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, "card2");
 
-        jLabel2.setText("Title Notes");
+        jLabel5.setText("Invite Member Group");
 
-        jLabel3.setText("Deskripsi Notes");
+        jLabel6.setText("Nama");
 
-        textnotesg.setColumns(20);
-        textnotesg.setRows(5);
-        jScrollPane3.setViewportView(textnotesg);
-
-        buttonmakenotes2.setText("Make Notes");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonmakenotes2)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(texttitlenotesg, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel3)
-                        .addComponent(jScrollPane3)))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(texttitlenotesg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonmakenotes2)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel3, "card3");
-
-        jLabel4.setText("List Notes");
-
-        listnotes.setModel(new javax.swing.AbstractListModel() {
+        listfriendinvitegroup.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(listnotes);
+        jScrollPane5.setViewportView(listfriendinvitegroup);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        buttonsearchinvitegroup.setText("Search");
+        buttonsearchinvitegroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonsearchinvitegroupActionPerformed(evt);
+            }
+        });
+
+        buttoninvitegroup.setText("aaInvite");
+        buttoninvitegroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttoninvitegroupActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 267, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 213, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(textnamainvitegroup))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonsearchinvitegroup, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buttoninvitegroup, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(textnamainvitegroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(buttonsearchinvitegroup)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttoninvitegroup)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, "card4");
+        getContentPane().add(jPanel1, "invitemembermenu");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,70 +238,109 @@ public class GUI3 extends javax.swing.JFrame {
         guiprofile.profileidgroup.setText(idgroupchatted.getText());
         CardLayout c = (CardLayout) guiprofile.profileswitch.getLayout();
         c.show(guiprofile.profileswitch,"profilegroup");
-        
         guiprofile.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        CardLayout c=(CardLayout) getContentPane().getLayout();
+        c.show(getContentPane(), "invitemembermenu");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonsearchinvitegroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsearchinvitegroupActionPerformed
+        db.connect();
+        String namafriendinvite=textnamainvitegroup.getText();
+        lm = new DefaultListModel();
+        System.out.println(namafriendinvite+active.getUsername());
+        try{
+            if(! namafriendinvite.equals(""))
+            {
+
+                String query="select id_account,nama,username from account join log_friend where (log_friend.id_account1='"+active.getIdacount()+"' && account.id_account=log_friend.id_account2)|| (log_friend.id_account2='"+active.getIdacount()+"'&& account.id_account=log_friend.id_account1 )";
+                ResultSet rs=db.getData(query);
+                try {
+                    while(rs.next())
+                    {
+                        int id_account_f=rs.getInt("id_account");
+                        String nama_f=rs.getString("nama");
+                        String username_f=rs.getString("username");
+                        lm.addElement(id_account_f+"/"+nama_f);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUI3.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+            {
+                throw new Exception ("Nama tidak boleh kosong");
+            }
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "query gagal");
+        }
+
+        listfriendinvitegroup.setModel(lm);
+        db.close();
+    }//GEN-LAST:event_buttonsearchinvitegroupActionPerformed
+
+    private void buttoninvitegroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttoninvitegroupActionPerformed
+        db.connect();
+        try{
+            String listvalue=listfriendinvitegroup.getSelectedValue().toString();
+            String[] getlistvalue=listvalue.split("/");
+
+            int idaccount_invited= Integer.parseInt(getlistvalue[0]);
+            String query= "INSERT INTO `log_join_member`(`id_group`, `time_log_join`, `id_account`, `status_join`) VALUES ("+idgroupchatted.getText() +",now(),'"+idaccount_invited+"',false)";
+            System.out.println(query);
+            
+            int i=db.execute(query);
+            if(i>0)
+            {
+                JOptionPane.showMessageDialog(this, "Requesting success... Waitin for approve");
+            }
+            else
+            {
+                throw new Exception ("Query gagal");
+            }
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        db.close();
+    }//GEN-LAST:event_buttoninvitegroupActionPerformed
+
+    private void buttonsendmessagegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsendmessagegActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_buttonsendmessagegActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI3().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonlistnotesg;
-    private javax.swing.JButton buttonmakenotes2;
-    private javax.swing.JButton buttonmakenotesg;
+    private javax.swing.JButton buttoninvitegroup;
+    private javax.swing.JButton buttonsearchinvitegroup;
     private javax.swing.JButton buttonsendmessageg;
+    public static javax.swing.JLabel idaccounttogroup;
     public static javax.swing.JLabel idgroupchatted;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JList listnotes;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JList listfriendinvitegroup;
     private javax.swing.JTextArea textchattingg;
-    public static javax.swing.JTextField textgroupchatted;
+    public static javax.swing.JLabel textgroupchatted;
     private javax.swing.JTextArea textmessageg;
-    private javax.swing.JTextArea textnotesg;
-    private javax.swing.JTextField texttitlenotesg;
+    private javax.swing.JTextField textnamainvitegroup;
     // End of variables declaration//GEN-END:variables
 }

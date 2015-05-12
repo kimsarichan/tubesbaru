@@ -56,12 +56,11 @@ public class timeline {
             "FROM \n" +
             "STATUS JOIN account\n" +
             "USING ( id_account ) \n" +
-            "WHERE status.id_account = ( \n" +
+            "WHERE status.id_account IN ( \n" +
             "SELECT id_account2\n" +
             "FROM log_friend\n" +
             "WHERE id_account1 ="+activea.getIdacount()+" ) \n" +
-            "OR id_account ="+ activea.getIdacount() +"\n" +
-            "LIMIT 0 , 30";
+            "OR id_account ="+ activea.getIdacount() +"\n" + "OR id_account IN (SELECT id_account1 from log_friend WHERE id_account2 ="+activea.getIdacount()+") ORDER BY id_status  DESC ";
             ResultSet rs = db.getData(query);
             while(rs.next()){
                 text stat = new text(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getDate(4));
@@ -76,16 +75,53 @@ public class timeline {
     }
     public void updatelike(text t){
         db.connect();
-        t.addlike();
         String query= "INSERT INTO `log_activity_status`( `id_status`, `time_activity_status`, `like_idaccount`) VALUES ("+t.getId_status()+",NOW(), "+t.getLike()+")";
         db.execute(query);
         db.close();
     }
+    public int loadlike(text t){
+        db.connect();
+        String query= "SELECT COUNT( like_idaccount ) \n" +
+        "FROM  `log_activity_status` \n" +
+        "WHERE id_status = "+t.getId_status();
+        ResultSet rs = db.getData(query);
+        int a = 0;
+        try {
+            while(rs.next()){
+                a= rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(timeline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        db.close();
+        return a;
+        
+    }
      public void updatecomment(text t, String c){
         db.connect();
-        t.setComment(c);
-        String query= "INSERT INTO `log_activity_status`( `id_status`, `time_activity_status`, `comment_idaccount`, comment_desc) VALUES ("+t.getId_status()+",NOW(), "+activea.getIdacount()+",'"+t.getComment()+"')";
+        String query= "INSERT INTO `log_activity_status`( `id_status`, `time_activity_status`, `id_account`, comment_desc) VALUES ("+t.getId_status()+",NOW(), "+activea.getIdacount()+",'"+c+"')";
         db.execute(query);
         db.close();
     }
+     public ArrayList<String> load_comment(text t){
+        db.connect();
+        String query= "SELECT nama, comment_desc\n" +
+        "FROM  `log_activity_status` \n" +
+        "JOIN account\n" +
+        "USING ( id_account ) \n" +
+        "WHERE id_status = "+t.getId_status()+"\n" +
+        "LIMIT 0 , 30";
+        ResultSet rs = db.getData(query);
+        ArrayList<String> list= new ArrayList(); 
+        String comment = null;
+        try {
+            while(rs.next()){
+                comment = rs.getString(1)+" : "+rs.getString(2);
+                list.add(comment);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(timeline.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+     }
 }

@@ -6,6 +6,14 @@
 
 package tubestahap1;
 
+import java.awt.CardLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author A450LC W8
@@ -15,10 +23,16 @@ public class GUI2 extends javax.swing.JFrame {
     /**
      * Creates new form GUI2
      */
-    public GUI2(String start_chat_username) {
-        
+    acount active;
+    acount friend;
+    message_database db_pesan;
+    Database db;
+    public GUI2(acount active , acount friend) {
+        this.active=active;
+        this.friend=friend;
+        db_pesan= new message_database(active,friend);
+        db= new Database();
         initComponents();
-        this.textfriendschatted.setText(start_chat_username);
     }
 
     /**
@@ -42,19 +56,7 @@ public class GUI2 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         textsendmessagesp = new javax.swing.JTextArea();
         sendchattingp = new javax.swing.JButton();
-        buttonmakenotesp = new javax.swing.JButton();
-        buttonlistnotesp = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        texttitlenotesp = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textnotesp = new javax.swing.JTextArea();
-        buttonmakenotesp2 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        listnotesp = new javax.swing.JList();
+        refresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -83,12 +85,13 @@ public class GUI2 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textfriendschatted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)))
         );
 
+        textchattingp.setEditable(false);
         textchattingp.setColumns(20);
         textchattingp.setRows(5);
         jScrollPane1.setViewportView(textchattingp);
@@ -101,7 +104,9 @@ public class GUI2 extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Send Messages");
@@ -117,6 +122,13 @@ public class GUI2 extends javax.swing.JFrame {
             }
         });
 
+        refresh.setText("refresh");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -124,11 +136,11 @@ public class GUI2 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sendchattingp)
-                .addContainerGap())
+                .addComponent(refresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sendchattingp))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,23 +148,12 @@ public class GUI2 extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sendchattingp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sendchattingp)
+                    .addComponent(refresh))
+                .addContainerGap())
         );
-
-        buttonmakenotesp.setText("MakeNotes");
-        buttonmakenotesp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonmakenotespActionPerformed(evt);
-            }
-        });
-
-        buttonlistnotesp.setText("ListNotes");
-        buttonlistnotesp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonlistnotespActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -161,11 +162,7 @@ public class GUI2 extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonlistnotesp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonmakenotesp)
-                .addContainerGap())
+                .addGap(184, 184, 184))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
@@ -177,12 +174,8 @@ public class GUI2 extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonmakenotesp)
-                        .addComponent(buttonlistnotesp))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(398, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(40, 40, 40)
@@ -194,165 +187,71 @@ public class GUI2 extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, "card2");
 
-        jLabel1.setText("Title Notes");
-
-        jLabel3.setText("Deskripsi Notes");
-
-        textnotesp.setColumns(20);
-        textnotesp.setRows(5);
-        jScrollPane3.setViewportView(textnotesp);
-
-        buttonmakenotesp2.setText("Make Notes");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonmakenotesp2)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(texttitlenotesp, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel3)
-                        .addComponent(jScrollPane3)))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(texttitlenotesp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buttonmakenotesp2)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel5, "card3");
-
-        jLabel4.setText("List Notes");
-
-        listnotesp.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(listnotesp);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 317, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel6, "card4");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void sendchattingpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendchattingpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sendchattingpActionPerformed
-
-    private void buttonlistnotespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonlistnotespActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_buttonlistnotespActionPerformed
-
-    private void buttonmakenotespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonmakenotespActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonmakenotespActionPerformed
 
     private void textfriendschattedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfriendschattedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textfriendschattedActionPerformed
 
+    private void sendchattingpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendchattingpActionPerformed
+        // TODO add your handling code here:
+        String pesan= textsendmessagesp.getText();
+        message m= new message(pesan,new Date(),active ,friend);
+        db_pesan.save_message(m);
+        System.out.println("berhasil");
+        loadm();
+        textsendmessagesp.setText("");
+    }//GEN-LAST:event_sendchattingpActionPerformed
+
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        // TODO add your handling code here:
+        loadm();
+    }//GEN-LAST:event_refreshActionPerformed
+    public void  loadm(){
+        //mengambil message dari database
+        db.connect();
+        ArrayList<message> pesana = new ArrayList();
+        String query=  "SELECT nama, `time_log_message_p`,  `message_p` FROM `log_message_personal` join account on (sender_idaccount_p=id_account)  WHERE (sender_idaccount_p= "+active.getIdacount()+" and receiver_idaccount = "+friend.getIdacount()+" ) or (sender_idaccount_p = "+friend.getIdacount()+" and receiver_idaccount = "+active.getIdacount()+" ) ORDER BY time_log_message_p DESC";
+        System.out.println(query);
+        ResultSet rs= db.getData(query);
+        try {
+            while(rs.next()){
+                String a=rs.getString(1)+" : "+rs.getString(3);
+                message me= new message(a,rs.getDate(2));
+                pesana.add(me);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(message_database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        db.close();
+        ArrayList<message> mesages= pesana;
+        //ArrayList<message> mesages= db_pesan.loadmessage();
+        String masuk_text="";
+        for(message p : mesages ){
+           masuk_text=masuk_text +p.getM()+"\n";
+        }
+        textchattingp.setText(masuk_text);
+        
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI2(null).setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonlistnotesp;
-    private javax.swing.JButton buttonmakenotesp;
-    private javax.swing.JButton buttonmakenotesp2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JList listnotesp;
+    private javax.swing.JButton refresh;
     private javax.swing.JButton sendchattingp;
     private javax.swing.JTextArea textchattingp;
-    private javax.swing.JTextField textfriendschatted;
-    private javax.swing.JTextArea textnotesp;
+    public static javax.swing.JTextField textfriendschatted;
     private javax.swing.JTextArea textsendmessagesp;
-    private javax.swing.JTextField texttitlenotesp;
     // End of variables declaration//GEN-END:variables
 }

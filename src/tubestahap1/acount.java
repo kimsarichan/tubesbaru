@@ -277,6 +277,12 @@ class acount implements Serializable {
 
     }
 
+    @Override
+    public String toString() {
+        return nama;
+    }
+    
+
     /**
      * @return the idacount
      */
